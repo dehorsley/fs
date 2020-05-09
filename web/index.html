@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
-
 <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="node_modules/xterm/dist/xterm.css" />
     <script src="node_modules/xterm/dist/xterm.js"></script>
     <script src="node_modules/nanomsg-browser/dist/nanomsg.js" charset="utf-8"></script>
@@ -11,86 +11,138 @@
     <div id="terminal"></div>
     <script>
 
-        // JS doesn't support 64-bit ints. Work-around from MDN:
-        DataView.prototype.getUint64 = function (byteOffset, littleEndian) {
-            // split 64-bit number into two 32-bit (4-byte) parts
-            const left = this.getUint32(byteOffset, littleEndian);
-            const right = this.getUint32(byteOffset + 4, littleEndian);
+(function(){
+    'use strict';
 
-            // combine the two 32-bit values
-            const combined = littleEndian ? left + 2 ** 32 * right : 2 ** 32 * left + right;
+    // JS doesn't support 64-bit ints. Work-around from MDN:
+    DataView.prototype.getUint64 = function (byteOffset, littleEndian) {
+        // split 64-bit number into two 32-bit (4-byte) parts
+        const left = this.getUint32(byteOffset, littleEndian);
+        const right = this.getUint32(byteOffset + 4, littleEndian);
 
-            if (!Number.isSafeInteger(combined))
-                console.warn(combined, 'exceeds MAX_SAFE_INTEGER. Precision may be lost');
+        // combine the two 32-bit values
+        const combined = littleEndian ? left + 2 ** 32 * right : 2 ** 32 * left + right;
 
-            return combined;
+        if (!Number.isSafeInteger(combined))
+            console.warn(combined, 'exceeds MAX_SAFE_INTEGER. Precision may be lost');
+
+        return combined;
+    }
+
+    const type = {
+        DATA: Symbol("DATA"),
+        HEARTBEAT: Symbol("HEARTBEAT"),
+        END_OF_SESSION: Symbol("END_OF_SESSION"),
+    }
+
+
+    function type_unmarshal(t) {
+        switch (t) {
+        case 0:
+            return type.DATA;
+        case 1:
+            return type.HEARTBEAT;
+        case 2: 
+            return type.HEARTBEAT;
         }
 
-        var term = new Terminal();
-        term.open(document.getElementById('terminal'));
+    }
 
-        ssubClient = { url: "", state: "INIT", fetchBacklog: true, seq = 0, continueAfterShutdown: true };
 
-        switch (ssubClient.state) {
-            case "INIT":
-                // connect, fetch backlog if specified
-                console.log("init state");
-                break;
+    function newSubClient(url, on) {
+        let ssubClient = { url: url, state: "INIT", fetchBacklog: true, seq: 0, continueAfterShutdown: true };
 
-            case "SYNCED":
-                // pass message to reciever
+        ssubClient.recv = function (buffer) {
+            switch (this.state) {
+                case "INIT":
+                    // connect, fetch backlog if specified
+                    console.log("init state");
+                    break;
 
-                // If we recieve seq < expected, a new stream has started
-                // WHAT TO DO HERE?
-                break;
+                case "SYNCED":
+                    // pass message to receiver
 
-            case "UNSYNCED":
-                // 
-                break;
+                    // If we receive seq < expected, a new stream has started
+                    // WHAT TO DO HERE?
+                    break;
 
-            case "SHUTTING_DOWN":
-                // recieved shutdown message. 
-                /// Check we are in sync and do a final resynce if possible
-                break;
+                case "UNSYNCED":
+                    // 
+                    break;
 
-            case "ZOMBIE":
-                // got shutdown msg but continueAfterShutdown set to true, so waiting
-                // for a new stream on the same channel
-                break;
+                case "SHUTTING_DOWN":
+                    // recieved shutdown message. 
+                    /// Check we are in sync and do a final resynce if possible
+                    break;
 
-            case "DEAD":
-                // We're all done. IF we get a message in this state we should
-                // raise an exception maybe
-                break;
-            default:
-                console.warn("unknown state");
+                case "ZOMBIE":
+                    // got shutdown msg but continueAfterShutdown set to true, so waiting
+                    // for a new stream on the same channel
+                    break;
+
+                case "DEAD":
+                    // We're all done. IF we get a message in this state we should
+                    // raise an exception maybe
+                    break;
+                default:
+                    console.warn("unknown state");
+            }
         }
 
+    }
 
-        function decodeSpubMsg(buffer) {
-            var view = new DataView(buffer);
+    let utf8decoder = new TextDecoder();
+
+    function msg_unmarshal(buffer) {
+        let view = new DataView(buffer);
+        let msg = {};
+        msg.type = type_unmarshal(view.getUint8(0));
+        msg.seq = view.getUint64(1, true);
+
+        if (msg.type != type.DATA) {
+            return msg;
         }
+        let len = view.getUint16(9, true);
+        if (len == 0) return msg;
+        msg.data = utf8decoder.decode(buffer.slice(11, 11+len));
+
+        return msg;
+    }
 
 
-        nanomsg.receiveArrayBuffer = true;
-        var loc = window.location, new_uri;
-        if (loc.protocol === "https:") {
-            new_uri = "wss:";
-        } else {
-            new_uri = "ws:";
+    nanomsg.receiveArrayBuffer = true;
+    var loc = window.location, new_uri;
+    if (loc.protocol === "https:") {
+        new_uri = "wss:";
+    } else {
+        new_uri = "ws:";
+    }
+    new_uri += "//" + loc.host;
+    new_uri += loc.pathname + "socks/pub";
+
+    // var term = new Terminal();
+    // term.open();
+
+    let term = document.getElementById('terminal')
+
+    const sub = new nanomsg.Socket(nanomsg.SUB);
+    sub.connect(new_uri);
+    sub.on('data', (rawmsg) => {
+        let msg = msg_unmarshal(rawmsg);
+        console.log(msg);
+        if (msg.type != type.DATA) {
+            return;
         }
-        new_uri += "//" + loc.host;
-        new_uri += loc.pathname + "socks/pub";
+        
+        let s = document.createElement("span");
+        s.textContent = msg.data;
 
-        const sub = new nanomsg.Socket(nanomsg.SUB);
-        sub.connect(new_uri);
-        sub.on('data', (msg) => {
-            var view = new DataView(msg);
-            console.log(view.getUint16(0, true));
-            i = view.getUint32(2, true);
+        term.appendChild(s);
 
-            term.write("msg: " + i + "\n\r");
-        });
+        // term.write(msg.data);
+        // term.write('\r');
+    });
+})()
     </script>
 </body>
 

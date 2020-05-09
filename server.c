@@ -7,7 +7,10 @@
 #include <nng/supplemental/http/http.h>
 #include <nng/supplemental/util/platform.h>
 
+#include "stream.h"
+
 #define PUB_URL "ws://localhost:8888/socks/pub"
+#define REP_URL "ws://localhost:8888/socks/rep"
 #define URL "http://localhost:8888/"
 
 void fatal(const char *what, int rv) {
@@ -16,29 +19,21 @@ void fatal(const char *what, int rv) {
 }
 
 void inproc_server(void *arg) {
-	nng_socket s;
+    (void) arg;
+    buffered_stream_t *s;
 	int rv;
 
-	if (((rv = nng_pub0_open(&s)) != 0) || ((rv = nng_listen(s, PUB_URL, NULL, 0)) != 0)) {
+	if ((rv = buffered_stream_open(&s) != 0))
 		fatal("unable to set up inproc", rv);
-	}
 
-	uint16_t header = 256;
 
-	uint8_t buf[254] = {'\0'};
+    if ((rv = buffered_stream_listen(s, PUB_URL, REP_URL) != 0))
+		fatal("unable listen", rv);
+
+	char buf[254] = {};
 	for (uint32_t i = 0;; i++) {
-		size_t len = 0;
-		memcpy(buf + len, &header, sizeof(header));
-		len += sizeof(header);
-
-		memcpy(buf + len, &i, sizeof(i));
-		len += sizeof(i);
-
-		rv = nng_send(s, buf, len, 0);
-		if (rv != 0)
-			fatal("nng_send", rv);
-
-		printf("%u\n", i);
+        size_t n = snprintf(buf, sizeof(buf), "%d\n", i);
+        if ((rv=(buffered_stream_send(s, buf, n)) < 0)) fatal("send", rv);
 		nng_msleep(200);
 	}
 }
