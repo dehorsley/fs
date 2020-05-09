@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="node_modules/xterm/dist/xterm.css" />
+    <script src="node_modules/xterm/dist/xterm.js"></script>
+    <script src="node_modules/nanomsg-browser/dist/nanomsg.js" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="terminal"></div>
+    <script>
+
+        // JS doesn't support 64-bit ints. Work-around from MDN:
+        DataView.prototype.getUint64 = function (byteOffset, littleEndian) {
+            // split 64-bit number into two 32-bit (4-byte) parts
+            const left = this.getUint32(byteOffset, littleEndian);
+            const right = this.getUint32(byteOffset + 4, littleEndian);
+
+            // combine the two 32-bit values
+            const combined = littleEndian ? left + 2 ** 32 * right : 2 ** 32 * left + right;
+
+            if (!Number.isSafeInteger(combined))
+                console.warn(combined, 'exceeds MAX_SAFE_INTEGER. Precision may be lost');
+
+            return combined;
+        }
+
+        var term = new Terminal();
+        term.open(document.getElementById('terminal'));
+
+        ssubClient = { url: "", state: "INIT", fetchBacklog: true, seq = 0, continueAfterShutdown: true };
+
+        switch (ssubClient.state) {
+            case "INIT":
+                // connect, fetch backlog if specified
+                console.log("init state");
+                break;
+
+            case "SYNCED":
+                // pass message to reciever
+
+                // If we recieve seq < expected, a new stream has started
+                // WHAT TO DO HERE?
+                break;
+
+            case "UNSYNCED":
+                // 
+                break;
+
+            case "SHUTTING_DOWN":
+                // recieved shutdown message. 
+                /// Check we are in sync and do a final resynce if possible
+                break;
+
+            case "ZOMBIE":
+                // got shutdown msg but continueAfterShutdown set to true, so waiting
+                // for a new stream on the same channel
+                break;
+
+            case "DEAD":
+                // We're all done. IF we get a message in this state we should
+                // raise an exception maybe
+                break;
+            default:
+                console.warn("unknown state");
+        }
+
+
+        function decodeSpubMsg(buffer) {
+            var view = new DataView(buffer);
+        }
+
+
+        nanomsg.receiveArrayBuffer = true;
+        var loc = window.location, new_uri;
+        if (loc.protocol === "https:") {
+            new_uri = "wss:";
+        } else {
+            new_uri = "ws:";
+        }
+        new_uri += "//" + loc.host;
+        new_uri += loc.pathname + "socks/pub";
+
+        const sub = new nanomsg.Socket(nanomsg.SUB);
+        sub.connect(new_uri);
+        sub.on('data', (msg) => {
+            var view = new DataView(msg);
+            console.log(view.getUint16(0, true));
+            i = view.getUint32(2, true);
+
+            term.write("msg: " + i + "\n\r");
+        });
+    </script>
+</body>
+
+</html>
