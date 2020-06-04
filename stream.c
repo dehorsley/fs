@@ -98,10 +98,12 @@ void cmd_cb(void *arg) {
 	if (nng_aio_result(s->rep_aio) != 0)
 		return;
 
+    printf("got msg");
+
 	msg = nng_aio_get_msg(s->rep_aio);
 
-	uint32_t req_seq;
-	rv = nng_msg_chop_u32(msg, &req_seq);
+	uint64_t req_seq;
+	rv = nng_msg_chop_u64(msg, &req_seq);
 	nng_msg_free(msg);
 
 	if (rv != 0) {

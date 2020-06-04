@@ -4,30 +4,47 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="node_modules/xterm/dist/xterm.css" />
     <script src="node_modules/xterm/dist/xterm.js"></script>
-    <script src="node_modules/nanomsg-browser/dist/nanomsg.js" charset="utf-8"></script>
+    <script src="node_modules/nanomsg-browser/src/nanomsg.js" charset="utf-8"></script>
 </head>
 
+<style>
+#terminal .content {
+    white-space: pre;
+    font-family: monospace;
+}
+
+#terminal {
+    width: 100%;
+    height: 50vh;
+    color: green;
+    background-color: black;
+    overflow: scroll;
+}
+#terminal * {
+    overflow-anchor: none;
+}
+
+#terminal .anchor {
+    overflow-anchor: auto;
+    height: 1px;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+</style>
+
 <body>
-    <div id="terminal"></div>
+    <div id="terminal">
+        <div class="content"></div>
+        <div class="anchor"></div>
+    </div>
     <script>
 
 (function(){
     'use strict';
-
-    // JS doesn't support 64-bit ints. Work-around from MDN:
-    DataView.prototype.getUint64 = function (byteOffset, littleEndian) {
-        // split 64-bit number into two 32-bit (4-byte) parts
-        const left = this.getUint32(byteOffset, littleEndian);
-        const right = this.getUint32(byteOffset + 4, littleEndian);
-
-        // combine the two 32-bit values
-        const combined = littleEndian ? left + 2 ** 32 * right : 2 ** 32 * left + right;
-
-        if (!Number.isSafeInteger(combined))
-            console.warn(combined, 'exceeds MAX_SAFE_INTEGER. Precision may be lost');
-
-        return combined;
-    }
 
     const type = {
         DATA: Symbol("DATA"),
@@ -52,43 +69,6 @@
     function newSubClient(url, on) {
         let ssubClient = { url: url, state: "INIT", fetchBacklog: true, seq: 0, continueAfterShutdown: true };
 
-        ssubClient.recv = function (buffer) {
-            switch (this.state) {
-                case "INIT":
-                    // connect, fetch backlog if specified
-                    console.log("init state");
-                    break;
-
-                case "SYNCED":
-                    // pass message to receiver
-
-                    // If we receive seq < expected, a new stream has started
-                    // WHAT TO DO HERE?
-                    break;
-
-                case "UNSYNCED":
-                    // 
-                    break;
-
-                case "SHUTTING_DOWN":
-                    // recieved shutdown message. 
-                    /// Check we are in sync and do a final resynce if possible
-                    break;
-
-                case "ZOMBIE":
-                    // got shutdown msg but continueAfterShutdown set to true, so waiting
-                    // for a new stream on the same channel
-                    break;
-
-                case "DEAD":
-                    // We're all done. IF we get a message in this state we should
-                    // raise an exception maybe
-                    break;
-                default:
-                    console.warn("unknown state");
-            }
-        }
-
     }
 
     let utf8decoder = new TextDecoder();
@@ -96,21 +76,31 @@
     function msg_unmarshal(buffer) {
         let view = new DataView(buffer);
         let msg = {};
-        msg.type = type_unmarshal(view.getUint8(0));
-        msg.seq = view.getUint64(1, true);
+
+        let bytes = 0;
+        msg.type = type_unmarshal(view.getUint8(bytes));
+        bytes += 1;
+        msg.seq = view.getBigUint64(bytes, true);
+        bytes += 8;
 
         if (msg.type != type.DATA) {
-            return msg;
+            return [msg, bytes];
         }
-        let len = view.getUint16(9, true);
-        if (len == 0) return msg;
-        msg.data = utf8decoder.decode(buffer.slice(11, 11+len));
 
-        return msg;
+        let len = view.getUint16(bytes, true);
+        bytes += 2;
+        if (len == 0) return [msg, bytes];
+        // TODO: probably don't want to decode here
+        msg.data = utf8decoder.decode(buffer.slice(bytes, bytes+len));
+        bytes += len
+
+        return [msg, bytes];
     }
 
-
+    // I don't like that this is a global and not per socket
     nanomsg.receiveArrayBuffer = true;
+    nanomsg.debug = true;
+
     var loc = window.location, new_uri;
     if (loc.protocol === "https:") {
         new_uri = "wss:";
@@ -118,30 +108,135 @@
         new_uri = "ws:";
     }
     new_uri += "//" + loc.host;
-    new_uri += loc.pathname + "socks/pub";
+    new_uri += loc.pathname;
+
+    const subaddr = new_uri + "socks/pub";
+    const repaddr = new_uri + "socks/rep";
 
     // var term = new Terminal();
     // term.open();
 
-    let term = document.getElementById('terminal')
+    let content = document.querySelectorAll("#terminal .content")[0]
+
+	// sequence id of the next msg we're expecting to receive
+    let seq = BigInt(0);
+	let hanled_timeout = false;
+	let synced = false; // state of client
+    let perform_first_sync = true;
+    let exit_on_terminate_msg = true;
+
+    //TODO: hanlde timeout
+
+    let syncing = false
+    let queue = []
 
     const sub = new nanomsg.Socket(nanomsg.SUB);
-    sub.connect(new_uri);
-    sub.on('data', (rawmsg) => {
-        let msg = msg_unmarshal(rawmsg);
-        console.log(msg);
-        if (msg.type != type.DATA) {
+    sub.connect(subaddr);
+    sub.on('data', async (rawmsg) => {
+        let [m, nbytes] = msg_unmarshal(rawmsg);
+
+        if (syncing) {
+            queue.push(m);
             return;
         }
-        
-        let s = document.createElement("span");
-        s.textContent = msg.data;
+        console.log(m);
 
-        term.appendChild(s);
+		if (!perform_first_sync) {
+			perform_first_sync = true;
+			synced             = true;
+			seq                = m.seq;
+		}
+
+		if (m.type == type.END_OF_SESSION) {
+			if (m.seq > seq) {
+				sync_msgs(seq, repaddr, 1000);
+			}
+            if (exit_on_terminate_msg) {
+                // TODO: close conn
+				return;
+            }
+            return
+        }
+
+
+		if (m.seq < seq) {
+			if (!synced) {
+				// Ignore msgs we've already seen. This may happen during re-sync as
+				// msgs received by OOB sync may also arrive at sub socket
+				return;
+			}
+			// If we're not rsyncing and we see a message with lower seq than we expect,
+			// the server may have restarted, and we need to resync right from the
+			// start.
+			seq = 0;
+		}
+
+		if (m.seq > seq) {
+			// We've missed a message, perform out-of-band sync
+            syncing = true;
+			synced  = false;
+            let s = await sync_msgs(seq, repaddr, -1);
+			if (s < 0) {
+				return;
+			}
+			// We may have gotten fewer or more messages than we were expecting.
+			// If we got more next, we ensure
+			// TODO: we should check if we got less here and do another resync
+
+            //TODO: remove this
+            seq = m.seq + 1;
+
+            console.log(queue);
+            queue = [];
+
+			// seq = s + 1;
+			return;
+		}
+
+		if (!synced && m.seq == seq) {
+			synced = true;
+		}
+
+		if (m.type == type.HEARTBEAT) {
+			return;
+		}
+
+		seq = m.seq + 1;
+        console.log(m)
+
+
+        content.appendChild(document.createTextNode(m.data));
+
+
+        // term.scrollTop = term.scrollHeight;
 
         // term.write(msg.data);
         // term.write('\r');
     });
+
+    async function sync_msgs(seq, addr, timeout) {
+        const req = new nanomsg.Socket(nanomsg.REQ);
+        try {
+            req.connect(addr);
+        } catch {
+            console.log("conn");
+            return 0;
+
+        }
+
+        const buf = new ArrayBuffer(8);
+        const view = new DataView(buf);
+
+        console.log(seq);
+        view.setBigUint64(0, seq);
+        console.log(buf);
+
+        data = await req.send(buf);
+        console.log("got request");
+        console.log(data)
+        return 0;
+    }
+
 })()
     </script>
 </body>

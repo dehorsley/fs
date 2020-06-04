@@ -34,7 +34,7 @@ void inproc_server(void *arg) {
 	for (uint32_t i = 0;; i++) {
         size_t n = snprintf(buf, sizeof(buf), "%d\n", i);
         if ((rv=(buffered_stream_send(s, buf, n)) < 0)) fatal("send", rv);
-		nng_msleep(200);
+		nng_msleep(100);
 	}
 }
 
