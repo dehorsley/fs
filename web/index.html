@@ -14,11 +14,11 @@
 }
 
 #terminal {
-    width: 100%;
+    width: 80ch;
     height: 50vh;
     color: green;
     background-color: black;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 #terminal * {
     overflow-anchor: none;
@@ -93,8 +93,17 @@ body{
         // TODO: probably don't want to decode here
         msg.data = utf8decoder.decode(buffer.slice(bytes, bytes+len));
         bytes += len
-
         return [msg, bytes];
+    }
+
+    function msgs_unmarshal(buffer) {
+        let msgs = [];
+        while (buffer.byteLength > 0) {
+            let [msg, bytes] = msg_unmarshal(buffer);
+            msgs.push(msg);
+            buffer = buffer.slice(bytes);
+        }
+        return msgs;
     }
 
     // I don't like that this is a global and not per socket
@@ -130,6 +139,17 @@ body{
     let syncing = false
     let queue = []
 
+    const max_nodes = 1000;
+    function callback(msg) {
+        if (!msg) {
+            throw "msg empy";
+        }
+        content.appendChild(document.createTextNode(msg.data));
+        if (content.childNodes.length > max_nodes) {
+            content.removeChild(content.firstChild);
+        }
+    }
+
     const sub = new nanomsg.Socket(nanomsg.SUB);
     sub.connect(subaddr);
     sub.on('data', async (rawmsg) => {
@@ -139,7 +159,6 @@ body{
             queue.push(m);
             return;
         }
-        console.log(m);
 
 		if (!perform_first_sync) {
 			perform_first_sync = true;
@@ -149,7 +168,8 @@ body{
 
 		if (m.type == type.END_OF_SESSION) {
 			if (m.seq > seq) {
-				sync_msgs(seq, repaddr, 1000);
+                // TODO: check if need to do more.
+				seq =  await sync_msgs(seq, repaddr, 1000);
 			}
             if (exit_on_terminate_msg) {
                 // TODO: close conn
@@ -168,7 +188,7 @@ body{
 			// If we're not rsyncing and we see a message with lower seq than we expect,
 			// the server may have restarted, and we need to resync right from the
 			// start.
-			seq = 0;
+			seq = BigInt(0);
 		}
 
 		if (m.seq > seq) {
@@ -176,20 +196,22 @@ body{
             syncing = true;
 			synced  = false;
             let s = await sync_msgs(seq, repaddr, -1);
-			if (s < 0) {
-				return;
-			}
 			// We may have gotten fewer or more messages than we were expecting.
 			// If we got more next, we ensure
 			// TODO: we should check if we got less here and do another resync
 
-            //TODO: remove this
-            seq = m.seq + 1;
-
+			seq = s + BigInt(1);
             console.log(queue);
+            for (let m of queue) {
+                if (m.seq != seq || m.type != type.DATA) {
+                    continue
+                }
+                callback(m);
+                seq = m.seq + BigInt(1);
+            }
             queue = [];
+            syncing = false;
 
-			// seq = s + 1;
 			return;
 		}
 
@@ -201,15 +223,8 @@ body{
 			return;
 		}
 
-		seq = m.seq + 1;
-        console.log(m)
-
-
-        content.appendChild(document.createTextNode(m.data));
-
-
-        // term.scrollTop = term.scrollHeight;
-
+        callback(m);
+		seq = m.seq + BigInt(1);
         // term.write(msg.data);
         // term.write('\r');
     });
@@ -217,24 +232,22 @@ body{
     async function sync_msgs(seq, addr, timeout) {
         const req = new nanomsg.Socket(nanomsg.REQ);
         try {
-            req.connect(addr);
+            await req.connect(addr);
         } catch {
             console.log("conn");
             return 0;
-
         }
 
         const buf = new ArrayBuffer(8);
         const view = new DataView(buf);
 
-        console.log(seq);
         view.setBigUint64(0, seq);
-        console.log(buf);
-
-        data = await req.send(buf);
-        console.log("got request");
-        console.log(data)
-        return 0;
+        const data = await req.send(buf);
+        const msgs = msgs_unmarshal(data);
+        for (const m of msgs) {
+            callback(m);
+        }
+        return msgs[msgs.length - 1].seq;
     }
 
 })()
