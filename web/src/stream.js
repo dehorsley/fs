@@ -1,5 +1,4 @@
-import nanomsg from 'nanomsg-browser';
-nanomsg.receiveArrayBuffer = true;
+import {Socket, Protocol} from 'nanomsg-browser';
 
 const type = {
     DATA: Symbol("DATA"),
@@ -78,7 +77,11 @@ export function Stream(addr) {
 
     const subaddr = addr + "/pub";
     const repaddr = addr + "/rep";
-    const sub = new nanomsg.Socket(nanomsg.SUB);
+    const sub = new Socket({
+        protocol: Protocol.SUB,
+        sendArrayBuffer: true,
+        receiveArrayBuffer: true,
+    });
 
     sub.connect(subaddr);
     sub.on('data', async (rawmsg) => {
@@ -160,7 +163,11 @@ export function Stream(addr) {
     });
 
     async function sync_msgs(seq, addr, timeout) {
-        const req = new nanomsg.Socket(nanomsg.REQ);
+        const req = new Socket({
+            protocol: Protocol.REQ,
+            sendArrayBuffer: true,
+            receiveArrayBuffer: true,
+        });
         try {
             await req.connect(addr);
         } catch {

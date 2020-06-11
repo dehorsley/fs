@@ -32,11 +32,14 @@ void inproc_server(void *arg) {
     if ((rv = buffered_stream_listen(s, PUB_URL, REP_URL) != 0))
 		fatal("unable listen", nng_strerror(rv));
 
+    double r = 0.0;
+
 	char buf[254] = {};
 	for (uint32_t i = 0;; i++) {
-        size_t n = snprintf(buf, sizeof(buf), "%d\n", i);
+        r += (2.0*rand())/RAND_MAX-1;
+        size_t n = snprintf(buf, sizeof(buf), "{\"blag\":%d, \"r\": %f, \"con\": \"constant\"}\n", i, r);
         if ((rv=(buffered_stream_send(s, buf, n)) < 0)) fatal("send", nng_strerror(rv));
-		nng_msleep(1000);
+		nng_msleep(200);
 	}
 }
 
@@ -62,7 +65,7 @@ int main(int argc, char **argv) {
 		fatal("nng_http_server_hold", nng_strerror(rv));
 	}
 
-	rv = nng_http_handler_alloc_directory(&handler, "/", "./web/dist/");
+	rv = nng_http_handler_alloc_directory(&handler, "/", "./web/public/");
 	if (rv != 0) {
 		fatal("nng_http_handler_alloc", nng_strerror(rv));
 	}
