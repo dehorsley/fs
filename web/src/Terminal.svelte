@@ -4,6 +4,7 @@
 
     export let scrollback = 1000;
     export let addr = "socks";
+    export let perform_first_sync = true;
 
 	let div;
     let bottom_anchor;
@@ -24,26 +25,18 @@
 
     let subaddr = new_uri  + addr;
     let s = new Stream(subaddr);
-    s.perform_first_sync = false;
-    let k = 0;
+    s.perform_first_sync = perform_first_sync;
     s.on('data', (data) => {
-        k += 1;
-        if (k == 10) {
-            k = 0;
-            const anchor = document.createElement('span');
-            /* anchor.className = bottom_anchor.className; */
-            anchor.appendChild(document.createTextNode(data));
-            div.appendChild(anchor);
-
-        } else {
-            div.appendChild(document.createTextNode(data));
-        }
-
+        div.appendChild(document.createTextNode(data));
         while (div.childNodes.length > scrollback) {
             div.removeChild(div.firstChild);
         }
-		/* if (autoscroll) terminal.scrollTo(0, terminal.scrollHeight); */
     });
+    s.on('resync', () => {
+        if (autoscroll) {
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+    })
 
     //s.on('restart', (data) => {
     //    content.appendChild(document.createTextNode("RESTARTED\n"));
@@ -61,11 +54,9 @@
         if (new_autoscroll){ 
             div.classList.add("overflow-anchor-none");
             div.classList.remove("overflow-anchor-auto");
-            console.log("On");
         } else {
             div.classList.add("overflow-anchor-auto");
             div.classList.remove("overflow-anchor-none");
-            console.log("Off");
         }
         autoscroll = new_autoscroll;
     }
@@ -75,12 +66,10 @@
 
 <style>
 	.terminal {
-		margin: 0 0 0.5em 0;
         white-space: pre;
         font-family: monospace;
-        width: 80ch;
+        overflow-y: auto;
         color: green;
-        overflow-y: scroll;
     }
 
     :global(.terminal *) {

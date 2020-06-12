@@ -57,6 +57,7 @@ export function Stream(addr) {
     let cbs = {
       data: [],
       end: [],
+      resync: [],
       restart: [],
       heartbeat: [],
       error: [],
@@ -141,6 +142,10 @@ export function Stream(addr) {
             }
             queue = [];
             syncing = false;
+
+            for (let f of cbs.resync) {
+                f();
+            }
 
             return;
         }
