@@ -9,4 +9,4 @@ option(NNG_TOOLS "Build nanomsg tools" OFF)
 add_subdirectory(nng EXCLUDE_FROM_ALL)
 
 add_executable(server server.c stream.c msg.c)
-target_link_libraries(server nng c)
+target_link_libraries(server nng jansson c)
