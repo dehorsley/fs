@@ -17,6 +17,8 @@
 
     const subaddr = new_uri + "socks";
 
+    const cmdaddr = new_uri + "cmd";
+
     const max_nodes = 1000;
     const s = new Stream(subaddr);
     s.perform_first_sync = true;
@@ -39,5 +41,5 @@
     <input type=range bind:value={scrollback} min=2 max=100>
     <Monitor {data} />
     <Terminal {scrollback} />
-    <OperatorInput />
+    <OperatorInput addr={cmdaddr}/>
 </div>
