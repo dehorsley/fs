@@ -32,6 +32,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
+#include "../include/clib/clib.h"
 
 static char *key_mode[ ]={ "track"  , "radc"  , "azel"};
 static char *key_wrap[ ]={ "neutral"  , "ccw"  , "cw"};

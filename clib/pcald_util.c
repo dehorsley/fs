@@ -30,6 +30,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
+#include "../include/clib/clib.h"
 
 static char *chd_key[ ]={
   "1u","2u","3u","4u","5u","6u","7u","8u",

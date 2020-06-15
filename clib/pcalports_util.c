@@ -28,6 +28,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
                                              /* parameter keywords */
 static char *key_vc1[ ]={ "1" , "2" , "3" , "4" ,  "9" , "10" , "11", "12"};
 static char *key_vc2[ ]={ "5" , "6" , "7" , "8" , "13" , "14" , "15", "16"};

@@ -40,7 +40,7 @@ int ip[5];                          /* ipc array */
   struct rclcn_req_buf reqbuf;
   struct rclcn_res_buf resbuf;
   int year, day, hour, min, sec;
-  ibool validated;
+  int validated;
 
   ini_rclcn_req(&reqbuf);
   add_rclcn_delaym_read(&reqbuf,dev);

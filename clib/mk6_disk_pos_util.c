@@ -27,6 +27,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 void mk6_disk_pos_mon(output,count,lcl)
 char *output;

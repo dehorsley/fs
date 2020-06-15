@@ -28,6 +28,7 @@
 #include "../include/macro.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 int wvolt_dec(lcl,count,ptr,indx)
 struct wvolt_cmd *lcl;

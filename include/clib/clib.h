@@ -1,3 +1,11 @@
+#ifndef FS_CLIB_H
+#define FS_CLIB_H
+
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+
+#include "../fs_types.h"
 /* clib/antcn_term.c */
 int antcn_term(int *out);
 /* clib/arg_util.c */
@@ -423,7 +431,7 @@ void lbaifpd(int itpis[2*2]);
 /* clib/lba_ifp_util.c */
 int lba_ifp_dec(struct ifp *lcl, int *count, char *ptr);
 void lba_ifp_enc(char *output, int *count, struct ifp *lcl);
-int lba_tpi_from_level(int level);
+int lba_tpi_from_level(unsigned short level);
 void lba_ifp_mon(char *output, int *count, struct ifp *lcl);
 int lba_ifp_setup(struct ifp *lcl, int n_ifp);
 int reset_err_flags(int n_ifp);
@@ -566,22 +574,22 @@ void add_rclcn_mode_read(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_tapeid_set(struct rclcn_req_buf *buffer, char *device, char *tapeid);
 void add_rclcn_tapeid_read(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_tapeid_read_pb(struct rclcn_req_buf *buffer, char *device);
-void add_rclcn_user_info_set(struct rclcn_req_buf *buffer, char *device, int fieldnum, ibool label, char *user_info);
-void add_rclcn_user_info_read(struct rclcn_req_buf *buffer, char *device, int fieldnum, ibool label);
-void add_rclcn_user_info_read_pb(struct rclcn_req_buf *buffer, char *device, int fieldnum, ibool label);
-void add_rclcn_user_dv_set(struct rclcn_req_buf *buffer, char *device, ibool user_dv, ibool pb_enable);
+void add_rclcn_user_info_set(struct rclcn_req_buf *buffer, char *device, int fieldnum, int label, char *user_info);
+void add_rclcn_user_info_read(struct rclcn_req_buf *buffer, char *device, int fieldnum, int label);
+void add_rclcn_user_info_read_pb(struct rclcn_req_buf *buffer, char *device, int fieldnum, int label);
+void add_rclcn_user_dv_set(struct rclcn_req_buf *buffer, char *device, int user_dv, int pb_enable);
 void add_rclcn_user_dv_read(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_user_dv_read_pb(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_group_set(struct rclcn_req_buf *buffer, char *device, int group);
 void add_rclcn_group_read(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_tapeinfo_read_pb(struct rclcn_req_buf *buffer, char *device);
-void add_rclcn_delay_set(struct rclcn_req_buf *buffer, char *device, ibool relative, int nanosec);
+void add_rclcn_delay_set(struct rclcn_req_buf *buffer, char *device, int relative, int nanosec);
 void add_rclcn_delay_read(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_delaym_read(struct rclcn_req_buf *buffer, char *device);
-void add_rclcn_barrelroll_set(struct rclcn_req_buf *buffer, char *device, ibool barrelroll);
+void add_rclcn_barrelroll_set(struct rclcn_req_buf *buffer, char *device, int barrelroll);
 void add_rclcn_barrelroll_read(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_align(struct rclcn_req_buf *buffer, char *device, int year, int day, int hour, int min, int sec, int nanosec);
-void add_rclcn_align_rel(struct rclcn_req_buf *buffer, char *device, ibool negative, int hour, int min, int sec, int nanosec);
+void add_rclcn_align_rel(struct rclcn_req_buf *buffer, char *device, int negative, int hour, int min, int sec, int nanosec);
 void add_rclcn_align_realign(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_align_selfalign(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_position_set(struct rclcn_req_buf *buffer, char *device, int code, int position);
@@ -589,21 +597,21 @@ void add_rclcn_position_set_ind(struct rclcn_req_buf *buffer, char *device, int 
 void add_rclcn_position_reestablish(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_position_read(struct rclcn_req_buf *buffer, char *device, int code);
 void add_rclcn_errmes(struct rclcn_req_buf *buffer, char *device, int error);
-void add_rclcn_esterr_read(struct rclcn_req_buf *buffer, char *device, ibool order_chantran);
-void add_rclcn_pdv_read(struct rclcn_req_buf *buffer, char *device, ibool order_chantran);
+void add_rclcn_esterr_read(struct rclcn_req_buf *buffer, char *device, int order_chantran);
+void add_rclcn_pdv_read(struct rclcn_req_buf *buffer, char *device, int order_chantran);
 void add_rclcn_scpll_mode_set(struct rclcn_req_buf *buffer, char *device, int scpll_mode);
 void add_rclcn_scpll_mode_read(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_tapetype_set(struct rclcn_req_buf *buffer, char *device, char *tapetype);
 void add_rclcn_tapetype_read(struct rclcn_req_buf *buffer, char *device);
-void add_rclcn_mk3_form_set(struct rclcn_req_buf *buffer, char *device, ibool mk3);
+void add_rclcn_mk3_form_set(struct rclcn_req_buf *buffer, char *device, int mk3);
 void add_rclcn_mk3_form_read(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_transport_times(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_station_info_read(struct rclcn_req_buf *buffer, char *device);
 void add_rclcn_consolecmd(struct rclcn_req_buf *buffer, char *device, char *command);
 void add_rclcn_postime_read(struct rclcn_req_buf *buffer, char *device, int tran);
 void add_rclcn_status(struct rclcn_req_buf *buffer, char *device);
-void add_rclcn_status_detail(struct rclcn_req_buf *buffer, char *device, int stat_code, ibool reread, ibool shortt);
-void add_rclcn_status_decode(struct rclcn_req_buf *buffer, char *device, int stat_code, ibool shortt);
+void add_rclcn_status_detail(struct rclcn_req_buf *buffer, char *device, int stat_code, int reread, int shortt);
+void add_rclcn_status_decode(struct rclcn_req_buf *buffer, char *device, int stat_code, int shortt);
 void add_rclcn_diag(struct rclcn_req_buf *buffer, char *device, int type);
 void add_rclcn_berdcb(struct rclcn_req_buf *buffer, char *device, int op_type, int chan, int meas_time);
 void add_rclcn_ident(struct rclcn_req_buf *buffer, char *device);
@@ -629,8 +637,8 @@ int get_rclcn_speed_read(struct rclcn_res_buf *buffer, int *speed);
 int get_rclcn_speed_read_pb(struct rclcn_res_buf *buffer, int *speed);
 int get_rclcn_error_decode(struct rclcn_res_buf *buffer, char *err_msg);
 int get_rclcn_time_set(struct rclcn_res_buf *buffer);
-int get_rclcn_time_read(struct rclcn_res_buf *buffer, int *year, int *day, int *hour, int *min, int *sec, ibool *validated, int *centisec);
-int get_rclcn_time_read_pb(struct rclcn_res_buf *buffer, int *year, int *day, int *hour, int *min, int *sec, ibool *validated);
+int get_rclcn_time_read(struct rclcn_res_buf *buffer, int *year, int *day, int *hour, int *min, int *sec, int *validated, int *centisec);
+int get_rclcn_time_read_pb(struct rclcn_res_buf *buffer, int *year, int *day, int *hour, int *min, int *sec, int *validated);
 int get_rclcn_mode_set(struct rclcn_res_buf *buffer);
 int get_rclcn_mode_read(struct rclcn_res_buf *buffer, char *mode);
 int get_rclcn_tapeid_set(struct rclcn_res_buf *buffer);
@@ -640,8 +648,8 @@ int get_rclcn_user_info_set(struct rclcn_res_buf *buffer);
 int get_rclcn_user_info_read(struct rclcn_res_buf *buffer, char *user_info);
 int get_rclcn_user_info_read_pb(struct rclcn_res_buf *buffer, char *user_info);
 int get_rclcn_user_dv_set(struct rclcn_res_buf *buffer);
-int get_rclcn_user_dv_read(struct rclcn_res_buf *buffer, ibool *user_dv, ibool *pb_enable);
-int get_rclcn_user_dv_read_pb(struct rclcn_res_buf *buffer, ibool *user_dv);
+int get_rclcn_user_dv_read(struct rclcn_res_buf *buffer, int *user_dv, int *pb_enable);
+int get_rclcn_user_dv_read_pb(struct rclcn_res_buf *buffer, int *user_dv);
 int get_rclcn_group_set(struct rclcn_res_buf *buffer);
 int get_rclcn_group_read(struct rclcn_res_buf *buffer, int *group, int *num_groups);
 int get_rclcn_tapeinfo_read_pb(struct rclcn_res_buf *buffer, unsigned char *table);
@@ -649,7 +657,7 @@ int get_rclcn_delay_set(struct rclcn_res_buf *buffer);
 int get_rclcn_delay_read(struct rclcn_res_buf *buffer, int *nanosec);
 int get_rclcn_delaym_read(struct rclcn_res_buf *buffer, int *nanosec);
 int get_rclcn_barrelroll_set(struct rclcn_res_buf *buffer);
-int get_rclcn_barrelroll_read(struct rclcn_res_buf *buffer, ibool *barrelroll);
+int get_rclcn_barrelroll_read(struct rclcn_res_buf *buffer, int *barrelroll);
 int get_rclcn_align(struct rclcn_res_buf *buffer);
 int get_rclcn_position_set(struct rclcn_res_buf *buffer);
 int get_rclcn_position_read(struct rclcn_res_buf *buffer, int *code, union pos_union *position);
@@ -661,7 +669,7 @@ int get_rclcn_scpll_mode_read(struct rclcn_res_buf *buffer, int *scpll_mode);
 int get_rclcn_tapetype_set(struct rclcn_res_buf *buffer);
 int get_rclcn_tapetype_read(struct rclcn_res_buf *buffer, char *tapetype);
 int get_rclcn_mk3_form_set(struct rclcn_res_buf *buffer);
-int get_rclcn_mk3_form_read(struct rclcn_res_buf *buffer, ibool *mk3);
+int get_rclcn_mk3_form_read(struct rclcn_res_buf *buffer, int *mk3);
 int get_rclcn_transport_times(struct rclcn_res_buf *buffer, int *num_entries, unsigned short serial[], unsigned int tot_on_time[], unsigned int tot_head_time[], unsigned int head_use_time[], unsigned int in_service_time[]);
 int get_rclcn_station_info_read(struct rclcn_res_buf *buffer, int *station, int *serialnum, char *nickname);
 int get_rclcn_consolecmd(struct rclcn_res_buf *buffer);
@@ -984,3 +992,4 @@ void wvoltD2mc(unsigned *data, struct wvolt_cmd *lcl);
 void wvoltD3mc(unsigned *data, struct wvolt_cmd *lcl);
 void mcD2wvolt(struct wvolt_cmd *lcl, unsigned data);
 void mcD3wvolt(struct wvolt_cmd *lcl, unsigned data);
+#endif

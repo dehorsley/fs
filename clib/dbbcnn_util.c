@@ -28,6 +28,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
+#include "../include/clib/clib.h"
 
 static char *if_key[ ]={ "a", "b", "c", "d" }; /* if input source */
 static char *bw_key[ ]={"1","2","4","8","16","32","64"};

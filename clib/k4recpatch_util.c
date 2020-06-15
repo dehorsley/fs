@@ -29,6 +29,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
+#include "../include/clib/clib.h"
 
 char *code2rp(), *code2rpk41(), *code2rpk42();
 int rp2code(), rp2codek41(), rp2codek42();

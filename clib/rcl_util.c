@@ -190,7 +190,7 @@ int rcl_dec(struct cmd_ds *command,struct rclcn_req_buf *buffer,int *icmd)
 
   } else if(strcmp(ptr,"user_info_set")==0) {
     int fieldnum;
-    ibool label;
+    int label;
 
     *icmd=RCL_CMD_USER_INFO_SET;
 
@@ -219,7 +219,7 @@ int rcl_dec(struct cmd_ds *command,struct rclcn_req_buf *buffer,int *icmd)
 
   } else if(strcmp(ptr,"user_info_read")==0) {
     int fieldnum;
-    ibool label;
+    int label;
 
     *icmd=RCL_CMD_USER_INFO_READ;
 
@@ -244,7 +244,7 @@ int rcl_dec(struct cmd_ds *command,struct rclcn_req_buf *buffer,int *icmd)
 
   } else if(strcmp(ptr,"user_info_read_pb")==0) {
     int fieldnum;
-    ibool label;
+    int label;
 
     *icmd=RCL_CMD_USER_INFO_READ_PB;
 
@@ -268,7 +268,7 @@ int rcl_dec(struct cmd_ds *command,struct rclcn_req_buf *buffer,int *icmd)
     return 0;
 
   } else if(strcmp(ptr,"user_dv_set")==0) {
-    ibool user_dv, pb_enable;
+    int user_dv, pb_enable;
 
     *icmd=RCL_CMD_USER_DV_SET;
 
@@ -331,7 +331,7 @@ int rcl_dec(struct cmd_ds *command,struct rclcn_req_buf *buffer,int *icmd)
     return 0;
 
   } else if(strcmp(ptr,"delay_set")==0) {
-    ibool relative;
+    int relative;
     int nanosec;
     *icmd=RCL_CMD_DELAY_SET;
     ptr=arg_next(command,&ilast);
@@ -364,7 +364,7 @@ int rcl_dec(struct cmd_ds *command,struct rclcn_req_buf *buffer,int *icmd)
     return 0;
 
   } else if(strcmp(ptr,"barrelroll_set")==0) {
-    ibool barrelroll;
+    int barrelroll;
     *icmd=RCL_CMD_BARRELROLL_SET;
     ptr=arg_next(command,&ilast);
     if(ptr==NULL)
@@ -425,7 +425,7 @@ int rcl_dec(struct cmd_ds *command,struct rclcn_req_buf *buffer,int *icmd)
 
       add_rclcn_align(buffer,device,year,day,hour,min,sec,nanosec);
     } else if(strcmp(ptr,"relative")==0 || (idecode && type==1)) {
-      ibool negative;
+      int negative;
       int hour, min, sec;
       int nanosec;
 
@@ -553,7 +553,7 @@ int rcl_dec(struct cmd_ds *command,struct rclcn_req_buf *buffer,int *icmd)
     return 0;
 
   } else if(strcmp(ptr,"esterr_read")==0) {
-    ibool order_chantran;
+    int order_chantran;
 
     *icmd=RCL_CMD_ESTERR_READ;
     ptr=arg_next(command,&ilast);
@@ -570,7 +570,7 @@ int rcl_dec(struct cmd_ds *command,struct rclcn_req_buf *buffer,int *icmd)
     return 0;
 
   } else if(strcmp(ptr,"pdv_read")==0) {
-    ibool order_chantran;
+    int order_chantran;
 
     *icmd=RCL_CMD_PDV_READ;
     ptr=arg_next(command,&ilast);
@@ -627,7 +627,7 @@ int rcl_dec(struct cmd_ds *command,struct rclcn_req_buf *buffer,int *icmd)
     return 0;
 
   } else if(strcmp(ptr,"mk3_form_set")==0) {
-    ibool mk3;
+    int mk3;
     *icmd=RCL_CMD_MK3_FORM_SET;
     ptr=arg_next(command,&ilast);
     if(ptr==NULL)
@@ -684,7 +684,7 @@ int rcl_dec(struct cmd_ds *command,struct rclcn_req_buf *buffer,int *icmd)
 
   } else if(strcmp(ptr,"status_detail")==0) {
     int stat_code;
-    ibool reread, shortt;
+    int reread, shortt;
 
     *icmd=RCL_CMD_STATUS_DETAIL;
     ptr=arg_next(command,&ilast);
@@ -718,7 +718,7 @@ int rcl_dec(struct cmd_ds *command,struct rclcn_req_buf *buffer,int *icmd)
 
   } else if(strcmp(ptr,"status_decode")==0) {
     int stat_code;
-    ibool reread, shortt;
+    int reread, shortt;
 
     *icmd=RCL_CMD_STATUS_DECODE;
     ptr=arg_next(command,&ilast);

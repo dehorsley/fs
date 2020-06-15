@@ -28,6 +28,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
+#include "../include/clib/clib.h"
 
 static char *agc_key[ ]={"man","agc"};
 

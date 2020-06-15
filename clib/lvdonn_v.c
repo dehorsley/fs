@@ -24,6 +24,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 void lvdonn_v(okay,ip,indxtp)
 int okay;

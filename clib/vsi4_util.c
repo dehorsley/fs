@@ -28,6 +28,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
                                              /* parameter keywords */
 static char *key_config[ ]={ "vlba","geo","tvg" };
                                           /* number of elem. keyword arrays */

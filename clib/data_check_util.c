@@ -27,6 +27,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 void data_check_mon(output,count,lcl)
 char *output;

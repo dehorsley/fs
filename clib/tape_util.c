@@ -28,6 +28,7 @@
 #include "../include/macro.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
                                               /* parameter keywords */
 static char *key_set[ ]={ "off", "low" };

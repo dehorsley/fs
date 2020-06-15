@@ -29,6 +29,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 #define MAX_OUT 256
 #define BUFSIZE 2048

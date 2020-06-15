@@ -30,6 +30,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
+#include "../include/clib/clib.h"
 
 int s2label_dec(lcl,count,ptr)
 struct s2label_cmd *lcl;

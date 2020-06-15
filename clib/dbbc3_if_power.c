@@ -26,6 +26,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 double dbbc3_if_power(unsigned counts, int como)
 {

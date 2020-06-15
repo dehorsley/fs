@@ -28,6 +28,7 @@
 #include "../include/macro.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 int rvac_dec(lcl,count,ptr)
 struct rvac_cmd *lcl;

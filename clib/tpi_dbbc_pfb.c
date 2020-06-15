@@ -31,6 +31,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 #define BUFSIZE 512
 
@@ -266,14 +267,14 @@ int ilen;                /* number of characters ibuf can hold, ignored */
 	  if(ptr[ik] >1600000) {
 	    strcat(ibuf,"$$$$$,");
 	  } else {
-	    int2str(ibuf,ptr[ik],7);
+	    int2str(ibuf, ptr[ik], 7, 0);
 	    strcat(ibuf,",");
 	  }
 	  if(isub==11)
 	    if(ptr2[ik] > 1600000) {
 	      strcat(ibuf,"$$$$$,");
 	    } else {
-	      int2str(ibuf,ptr2[ik],7);
+	      int2str(ibuf, ptr2[ik], 7, 0);
 	      strcat(ibuf,",");
 	    }
 	}
@@ -446,7 +447,7 @@ int itask;               /* 5=tsys, 6=tpidiff, 10=caltemps */
 	  if(itask==5) 
 	    flt2str(ibuf,shm_addr->systmp[ik],8,1);
 	  else if(itask==6) {
-	    int2str(ibuf,shm_addr->tpidiff[ik],5);
+	    int2str(ibuf, shm_addr->tpidiff[ik], 5, 0);
 	  } else if(itask==10) 
 	    flt2str(ibuf,shm_addr->caltemps[ik],8,3);
 	  
@@ -467,7 +468,7 @@ int itask;               /* 5=tsys, 6=tpidiff, 10=caltemps */
 	flt2str(ibuf,shm_addr->systmp[ik],8,1);
       else if(itask==6) {
 	if(shm_addr->tpidiff[ik] > 99999)
-	  int2str(ibuf,shm_addr->tpidiff[ik],5);
+	  int2str(ibuf, shm_addr->tpidiff[ik], 5, 0);
 	else
 	  flt2str(ibuf,
 		  dbbc_if_power(shm_addr->tpical[ik],i)-

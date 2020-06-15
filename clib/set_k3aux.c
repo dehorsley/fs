@@ -26,6 +26,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 void set_k3aux(lauxfm,ip)
 char lauxfm[12];

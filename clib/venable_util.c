@@ -29,6 +29,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
+#include "../include/clib/clib.h"
                                               /* parameter keywords */
 static char *key_group[ ]={ "g0" ,"g1" ,"g2" ,"g3" };
 static char *key_group2[ ]={ "g0" ,"g1" ,"g2" ,"g3" ,"g4" ,"g5" ,"g6" ,"g7"};

@@ -25,6 +25,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 int dbbc_version_check(char *inbuf, char *output)
 {

@@ -27,6 +27,7 @@
 
 #include "../include/params.h"
 #include "../include/fs_types.h"
+#include "../include/clib/clib.h"
 
 get_5btime(centisec,fm_tim,ip,to,m5sync,sz_m5sync,m5pps,sz_m5pps,
 	   m5freq,sz_m5freq,m5clock,sz_m5clock)

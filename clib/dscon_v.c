@@ -31,6 +31,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 int lba_tpi_from_level(unsigned short level);
 

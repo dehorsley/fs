@@ -26,6 +26,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 void get_k3time(centisec,fm_tim,ip)
 int centisec[2];

@@ -26,6 +26,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 void set_vrptrk(itrk, ip,indxtp) /* set vlba reproduce tracks */
 int itrk[2];              /* Mark III tracks requested */

@@ -195,7 +195,7 @@ int get_rclcn_time_set(struct rclcn_res_buf *buffer)
   return get_rclcn_res(buffer);
 }
 int get_rclcn_time_read(struct rclcn_res_buf *buffer, int *year, int *day,
-			int *hour, int *min, int *sec, ibool *validated,
+			int *hour, int *min, int *sec, int *validated,
 			int *centisec)
 {
   int ierr=get_rclcn_res(buffer);
@@ -223,7 +223,7 @@ int get_rclcn_time_read(struct rclcn_res_buf *buffer, int *year, int *day,
   if(ierr!=0)
     return ierr;
 
-  ierr=get_rclcn_res_data(buffer,validated ,sizeof(ibool));
+  ierr=get_rclcn_res_data(buffer,validated ,sizeof(int));
   if(ierr!=0)
     return ierr;
 
@@ -232,7 +232,7 @@ int get_rclcn_time_read(struct rclcn_res_buf *buffer, int *year, int *day,
   return ierr;
 }
 int get_rclcn_time_read_pb(struct rclcn_res_buf *buffer, int *year, int *day,
-			int *hour, int *min, int *sec, ibool *validated)
+			int *hour, int *min, int *sec, int *validated)
 {
   int ierr=get_rclcn_res(buffer);
 
@@ -259,7 +259,7 @@ int get_rclcn_time_read_pb(struct rclcn_res_buf *buffer, int *year, int *day,
   if(ierr!=0)
     return ierr;
 
-  ierr=get_rclcn_res_data(buffer,validated ,sizeof(ibool));
+  ierr=get_rclcn_res_data(buffer,validated ,sizeof(int));
 
   return ierr;
 }
@@ -334,30 +334,30 @@ int get_rclcn_user_dv_set(struct rclcn_res_buf *buffer)
 {
   return get_rclcn_res(buffer);
 }
-int get_rclcn_user_dv_read(struct rclcn_res_buf *buffer, ibool *user_dv,
-			   ibool *pb_enable)
+int get_rclcn_user_dv_read(struct rclcn_res_buf *buffer, int *user_dv,
+			   int *pb_enable)
 {
   int ierr=get_rclcn_res(buffer);
 
   if(ierr!=0)
     return ierr;
 
-  ierr=get_rclcn_res_data(buffer,user_dv,  sizeof(ibool));
+  ierr=get_rclcn_res_data(buffer,user_dv,  sizeof(int));
   if(ierr!=0)
     return ierr;
 
-  ierr=get_rclcn_res_data(buffer,pb_enable,sizeof(ibool));
+  ierr=get_rclcn_res_data(buffer,pb_enable,sizeof(int));
 
   return ierr;
 }
-int get_rclcn_user_dv_read_pb(struct rclcn_res_buf *buffer, ibool *user_dv)
+int get_rclcn_user_dv_read_pb(struct rclcn_res_buf *buffer, int *user_dv)
 {
   int ierr=get_rclcn_res(buffer);
 
   if(ierr!=0)
     return ierr;
 
-  ierr=get_rclcn_res_data(buffer,user_dv,  sizeof(ibool));
+  ierr=get_rclcn_res_data(buffer,user_dv,  sizeof(int));
 
   return ierr;
 }
@@ -425,14 +425,14 @@ int get_rclcn_barrelroll_set(struct rclcn_res_buf *buffer)
 {
   return get_rclcn_res(buffer);
 }
-int get_rclcn_barrelroll_read(struct rclcn_res_buf *buffer, ibool *barrelroll)
+int get_rclcn_barrelroll_read(struct rclcn_res_buf *buffer, int *barrelroll)
 {
   int ierr=get_rclcn_res(buffer);
 
   if(ierr!=0)
     return ierr;
 
-  ierr=get_rclcn_res_data(buffer,barrelroll, sizeof(ibool));
+  ierr=get_rclcn_res_data(buffer,barrelroll, sizeof(int));
 
   return ierr;
 }
@@ -567,14 +567,14 @@ int get_rclcn_mk3_form_set(struct rclcn_res_buf *buffer)
 {
   return get_rclcn_res(buffer);
 }
-int get_rclcn_mk3_form_read(struct rclcn_res_buf *buffer, ibool *mk3)
+int get_rclcn_mk3_form_read(struct rclcn_res_buf *buffer, int *mk3)
 {
   int ierr=get_rclcn_res(buffer);
 
   if(ierr!=0)
     return ierr;
 
-  ierr=get_rclcn_res_data(buffer,mk3, sizeof(ibool));
+  ierr=get_rclcn_res_data(buffer,mk3, sizeof(int));
 
   return ierr;
 }

@@ -30,6 +30,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 static struct dist_cmd lclsave[2];     /* saved if states */
 static int ia,ib,ic,id;                /* which if chains are in use */

@@ -30,6 +30,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
+#include "../include/clib/clib.h"
 
 static char *dev_key[ ]={"u1","u2","u3","u4","u5","u6"};
 static char *sb_key[ ]={"unknown","usb","lsb"};

@@ -28,6 +28,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
+#include "../include/clib/clib.h"
 
 static char *mode_key[ ]={"astro","geo","wastro","test","lba","astro2",
 			  "astro3", "geo2"};

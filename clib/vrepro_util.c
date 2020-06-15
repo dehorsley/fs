@@ -29,6 +29,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
+#include "../include/clib/clib.h"
                                               /* parameter keywords */
 static char *key_mode[ ]={ "read", "byp" };
 static char *key_equ [ ]={ "std", "alt1", "alt2", "dis"};

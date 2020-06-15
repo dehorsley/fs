@@ -27,6 +27,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 static int rel_addr[ ]   ={0x51,0x54,0x52,0x55,0x57,0x53,0x56,0x58};
     /* rel_addr gives the VLBA monitor point for the equiv. M3 channel */

@@ -18,6 +18,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 /* general header file for all fs data structure definations */
+#ifndef FS_TYPES_H
+#define FS_TYPES_H
 
 #include "../rclco/rcl/rcl.h"
 #include "bbc_ds.h"
@@ -53,6 +55,8 @@
 #include "k4st_ds.h"
 #include "k4vclo_ds.h"
 #include "k4vc_ds.h"
+#include "k4rec_ds.h"
+#include "k4tape_ds.h"
 #include "k4vcif_ds.h"
 #include "k4vcbw_ds.h"
 #include "k3fm_ds.h"
@@ -110,3 +114,5 @@
 #include "dbbc_vsix_ds.h"
 #include "dbbc_pfbx_ds.h"
 #include "dbbcvsi_clk_ds.h"
+
+#endif

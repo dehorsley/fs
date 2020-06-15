@@ -289,52 +289,52 @@ void add_rclcn_tapeid_read_pb(struct rclcn_req_buf *buffer, char *device)
   return;
 }
 void add_rclcn_user_info_set(struct rclcn_req_buf *buffer, char *device,
-			     int fieldnum, ibool label, char *user_info)
+			     int fieldnum, int label, char *user_info)
 {
-  char bytes[1+sizeof(int)+sizeof(ibool)];
+  char bytes[1+sizeof(int)+sizeof(int)];
 
   bytes[0]=RCL_CMD_USER_INFO_SET;
   memcpy(bytes+1,            &fieldnum,sizeof(int)  );
-  memcpy(bytes+1+sizeof(int),&label,   sizeof(ibool));
+  memcpy(bytes+1+sizeof(int),&label,   sizeof(int));
 
   add_rclcn_request_string(buffer,device,bytes,sizeof(bytes),user_info);
   
   return;
 }
 void add_rclcn_user_info_read(struct rclcn_req_buf *buffer, char *device,
-			      int fieldnum, ibool label)
+			      int fieldnum, int label)
 {
-  char bytes[1+sizeof(int)+sizeof(ibool)];
+  char bytes[1+sizeof(int)+sizeof(int)];
 
   bytes[0]=RCL_CMD_USER_INFO_READ;
   memcpy(bytes+1,            &fieldnum,sizeof(int)  );
-  memcpy(bytes+1+sizeof(int),&label,   sizeof(ibool));
+  memcpy(bytes+1+sizeof(int),&label,   sizeof(int));
 
   add_rclcn_request(buffer,device,bytes,sizeof(bytes));
   
   return;
 }
 void add_rclcn_user_info_read_pb(struct rclcn_req_buf *buffer, char *device,
-				 int fieldnum, ibool label)
+				 int fieldnum, int label)
 {
-  char bytes[1+sizeof(int)+sizeof(ibool)];
+  char bytes[1+sizeof(int)+sizeof(int)];
 
   bytes[0]=RCL_CMD_USER_INFO_READ_PB;
   memcpy(bytes+1,            &fieldnum,sizeof(int)  );
-  memcpy(bytes+1+sizeof(int),&label,   sizeof(ibool));
+  memcpy(bytes+1+sizeof(int),&label,   sizeof(int));
 
   add_rclcn_request(buffer,device,bytes,sizeof(bytes));
   
   return;
 }
 void add_rclcn_user_dv_set(struct rclcn_req_buf *buffer, char *device,
-			   ibool user_dv, ibool pb_enable)
+			   int user_dv, int pb_enable)
 {
-  char bytes[1+2*sizeof(ibool)];
+  char bytes[1+2*sizeof(int)];
 
   bytes[0]=RCL_CMD_USER_DV_SET;
-  memcpy(bytes+1,              &user_dv,  sizeof(ibool));
-  memcpy(bytes+1+sizeof(ibool),&pb_enable,sizeof(ibool));
+  memcpy(bytes+1,              &user_dv,  sizeof(int));
+  memcpy(bytes+1+sizeof(int),&pb_enable,sizeof(int));
 
   add_rclcn_request(buffer,device,bytes,sizeof(bytes));
   
@@ -390,12 +390,12 @@ void add_rclcn_tapeinfo_read_pb(struct rclcn_req_buf *buffer, char *device)
   return;
 }
 void add_rclcn_delay_set(struct rclcn_req_buf *buffer, char *device,
-			 ibool relative, int nanosec)
+			 int relative, int nanosec)
 {
-  char bytes[1+sizeof(ibool)+sizeof(int)];
+  char bytes[1+sizeof(int)+sizeof(int)];
   bytes[0]=RCL_CMD_DELAY_SET;
-  memcpy(bytes+1,              &relative,sizeof(ibool)   );
-  memcpy(bytes+1+sizeof(ibool),&nanosec ,sizeof(int));
+  memcpy(bytes+1,              &relative,sizeof(int)   );
+  memcpy(bytes+1+sizeof(int),&nanosec ,sizeof(int));
 
   add_rclcn_request(buffer,device,bytes,sizeof(bytes));
   
@@ -420,11 +420,11 @@ void add_rclcn_delaym_read(struct rclcn_req_buf *buffer, char *device)
   return;
 }
 void add_rclcn_barrelroll_set(struct rclcn_req_buf *buffer, char *device,
-			 ibool barrelroll)
+			 int barrelroll)
 {
-  char bytes[1+sizeof(ibool)];
+  char bytes[1+sizeof(int)];
   bytes[0]=RCL_CMD_BARRELROLL_SET;
-  memcpy(bytes+1,&barrelroll,sizeof(ibool));
+  memcpy(bytes+1,&barrelroll,sizeof(int));
 
   add_rclcn_request(buffer,device,bytes,sizeof(bytes));
   
@@ -458,17 +458,17 @@ void add_rclcn_align(struct rclcn_req_buf *buffer, char *device,
   return;
 }
 void add_rclcn_align_rel(struct rclcn_req_buf *buffer, char *device,
-		     ibool negative, int hour, int min, int sec,
+		     int negative, int hour, int min, int sec,
 		     int nanosec)
 {
-  char bytes[2+sizeof(ibool)+3*sizeof(int)+sizeof(int)];
+  char bytes[2+sizeof(int)+3*sizeof(int)+sizeof(int)];
   bytes[0]=RCL_CMD_ALIGN;
   bytes[1]=1;
-  memcpy(bytes+2,                            &negative,sizeof(ibool)   );
-  memcpy(bytes+2+sizeof(ibool)              ,&hour    ,sizeof(int)     );
-  memcpy(bytes+2+sizeof(ibool)+  sizeof(int),&min     ,sizeof(int)     );
-  memcpy(bytes+2+sizeof(ibool)+2*sizeof(int),&sec     ,sizeof(int)     );
-  memcpy(bytes+2+sizeof(ibool)+3*sizeof(int),&nanosec ,sizeof(int));
+  memcpy(bytes+2,                            &negative,sizeof(int)   );
+  memcpy(bytes+2+sizeof(int)              ,&hour    ,sizeof(int)     );
+  memcpy(bytes+2+sizeof(int)+  sizeof(int),&min     ,sizeof(int)     );
+  memcpy(bytes+2+sizeof(int)+2*sizeof(int),&sec     ,sizeof(int)     );
+  memcpy(bytes+2+sizeof(int)+3*sizeof(int),&nanosec ,sizeof(int));
 
   add_rclcn_request(buffer,device,bytes,sizeof(bytes));
   
@@ -562,24 +562,24 @@ void add_rclcn_errmes(struct rclcn_req_buf *buffer, char *device,
   return;
 }
 void add_rclcn_esterr_read(struct rclcn_req_buf *buffer, char *device,
-			   ibool order_chantran)
+			   int order_chantran)
 {
-  char bytes[1+sizeof(ibool)];
+  char bytes[1+sizeof(int)];
 
   bytes[0]=RCL_CMD_ESTERR_READ;
-  memcpy(bytes+1,&order_chantran,sizeof(ibool));
+  memcpy(bytes+1,&order_chantran,sizeof(int));
 
   add_rclcn_request(buffer,device,bytes,sizeof(bytes));
   
   return;
 }
 void add_rclcn_pdv_read(struct rclcn_req_buf *buffer, char *device,
-			   ibool order_chantran)
+			   int order_chantran)
 {
-  char bytes[1+sizeof(ibool)];
+  char bytes[1+sizeof(int)];
 
   bytes[0]=RCL_CMD_PDV_READ;
-  memcpy(bytes+1,&order_chantran,sizeof(ibool));
+  memcpy(bytes+1,&order_chantran,sizeof(int));
 
   add_rclcn_request(buffer,device,bytes,sizeof(bytes));
   
@@ -625,11 +625,11 @@ void add_rclcn_tapetype_read(struct rclcn_req_buf *buffer, char *device)
   return;
 }
 void add_rclcn_mk3_form_set(struct rclcn_req_buf *buffer, char *device,
-			 ibool mk3)
+			 int mk3)
 {
-  char bytes[1+sizeof(ibool)];
+  char bytes[1+sizeof(int)];
   bytes[0]=RCL_CMD_MK3_FORM_SET;
-  memcpy(bytes+1,&mk3,sizeof(ibool));
+  memcpy(bytes+1,&mk3,sizeof(int));
 
   add_rclcn_request(buffer,device,bytes,sizeof(bytes));
   
@@ -693,27 +693,27 @@ void add_rclcn_status(struct rclcn_req_buf *buffer, char *device)
   return;
 }
 void add_rclcn_status_detail(struct rclcn_req_buf *buffer, char *device,
-			     int stat_code, ibool reread, ibool shortt)
+			     int stat_code, int reread, int shortt)
 {
-  char bytes[1+sizeof(int)+2*sizeof(ibool)];
+  char bytes[1+sizeof(int)+2*sizeof(int)];
 
   bytes[0]=RCL_CMD_STATUS_DETAIL;
   memcpy(bytes+1,                          &stat_code,sizeof(int  ));
-  memcpy(bytes+1+sizeof(int),              &reread   ,sizeof(ibool));
-  memcpy(bytes+1+sizeof(int)+sizeof(ibool),&shortt   ,sizeof(ibool));
+  memcpy(bytes+1+sizeof(int),              &reread   ,sizeof(int));
+  memcpy(bytes+1+sizeof(int)+sizeof(int),&shortt   ,sizeof(int));
 
   add_rclcn_request(buffer,device,bytes,sizeof(bytes));
   
   return;
 }
 void add_rclcn_status_decode(struct rclcn_req_buf *buffer, char *device,
-			     int stat_code, ibool shortt)
+			     int stat_code, int shortt)
 {
-  char bytes[1+sizeof(int)+sizeof(ibool)];
+  char bytes[1+sizeof(int)+sizeof(int)];
 
   bytes[0]=RCL_CMD_STATUS_DECODE;
   memcpy(bytes+1,            &stat_code,sizeof(int  ));
-  memcpy(bytes+1+sizeof(int),&shortt   ,sizeof(ibool));
+  memcpy(bytes+1+sizeof(int),&shortt   ,sizeof(int));
 
   add_rclcn_request(buffer,device,bytes,sizeof(bytes));
   

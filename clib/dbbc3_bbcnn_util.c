@@ -24,10 +24,12 @@
 #include <sys/types.h>
 #include <limits.h>
 #include <math.h>
+#include <ctype.h>
 #include "../include/params.h"
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
+#include "../include/clib/clib.h"
 
 static char *if_key[ ]={ "a", "b", "c", "d", "e", "f", "g", "h" };
                                                          /* if input source */

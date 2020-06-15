@@ -40,6 +40,7 @@
 #include "../include/fscom.h"         /* shared memory (fscom C data 
                                        * structure) layout */
 #include "../include/shm_addr.h"      /* declaration of pointer to fscom */
+#include "../include/clib/clib.h"
 /*  */
 
 

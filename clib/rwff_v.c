@@ -29,6 +29,7 @@
 #include "../include/macro.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
+#include "../include/clib/clib.h"
 
 void rwff_v(ip,isub,ierr)
 int ip[5];

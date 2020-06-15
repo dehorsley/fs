@@ -25,6 +25,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 void lvdofn_v(ip,indxtp)
 int ip[5];

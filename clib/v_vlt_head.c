@@ -26,6 +26,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/clib/clib.h"
 
 void v_vlt_head__(ihead,volt,ip,indxtp)
 int *ihead;                     /* head 1-4 */
