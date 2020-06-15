@@ -29,7 +29,7 @@
 #include "../include/shm_addr.h"
 #include "../include/clib/clib.h"
 
-static chekr=0;
+static int chekr=0;
 
 void set_chekr_v2_motion_done__()
 {
