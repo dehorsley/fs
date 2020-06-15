@@ -26,6 +26,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/rtelb/rtelb.h"
 #include "../include/clib/clib.h"
 
 clock_t rte_times(struct tms *);

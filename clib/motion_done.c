@@ -26,6 +26,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/rtelb/rtelb.h"
 #include "../include/clib/clib.h"
 
 int motion_done(ip,indx)

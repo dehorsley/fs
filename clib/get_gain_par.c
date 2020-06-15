@@ -26,6 +26,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
+#include "../include/rtelb/rtelb.h"
 #include "../include/clib/clib.h"
 
 get_gain_par(ifchain,center,fwhm,dpfu,gain,tcal)

@@ -1,3 +1,7 @@
+#ifndef RTELB_H
+#define RTELB_H
+#include <sys/times.h>
+#include <time.h>
 /* rtelb/rte2secs.c */
 void rte2secs(int it[6], int *seconds);
 /* rtelb/rte_alarm.c */
@@ -34,3 +38,4 @@ void secs_times(int it[5], int it6);
 int main(void);
 /* rtelb/testusl.c */
 int main(void);
+#endif
