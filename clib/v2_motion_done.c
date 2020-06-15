@@ -27,6 +27,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/poclb/poclb.h"
 #include "../include/clib/clib.h"
 
 static int chekr=0;
@@ -61,7 +62,7 @@ int indx;
       end_req(ip,&buffer);                  /* send buffer and schedule */
       skd_run("mcbcn",'w',ip);
       skd_par(ip);
-      if(ip[2] <0) return;
+      if(ip[2] <0) return 0;
 
       opn_res(&buffer_out,ip);              /* decode response */
 

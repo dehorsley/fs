@@ -1,3 +1,10 @@
+#ifndef FS_POCLB_H
+#define FS_POCLB_H
+
+#include "../../poclb/novas.h"
+#include "../pmodel.h"
+#include "../fs_types.h"
+
 /* poclb/cnvrt.c */
 void cnvrt(int mode, double ain1, double ain2, double *out1, double *out2, int it[6], double alat, double wlong);
 void cnvrt2(int mode, double ain1, double ain2, double *out1, double *out2, int it[6], double dut, double alat, double wlong);
@@ -78,3 +85,4 @@ void sidtm(int jd, double *sider, double *fract);
 /* poclb/solsys3.c */
 short int solarsystem(double tjd, short int body, short int origin, double *pos, double *vel);
 void sun(double jd, double *ra, double *dec, double *dis);
+#endif

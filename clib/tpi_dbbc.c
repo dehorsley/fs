@@ -31,6 +31,7 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
+#include "../include/poclb/poclb.h"
 #include "../include/clib/clib.h"
 
 #define BUFSIZE 512
