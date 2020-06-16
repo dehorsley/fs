@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-play_wav(iwhich)
+int play_wav(iwhich)
 int iwhich;
 {
   char command[512];

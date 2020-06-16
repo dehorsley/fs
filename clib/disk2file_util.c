@@ -182,7 +182,7 @@ struct disk2file_mon *lcl;
    return;
 }
 
-disk2file_2_m5_scan_set(ptr,lcl)
+int disk2file_2_m5_scan_set(ptr,lcl)
 char *ptr;
 struct disk2file_cmd *lcl;
 {
@@ -204,7 +204,7 @@ struct disk2file_cmd *lcl;
 
   return;
 }
-disk2file_2_m5(ptr,lcl)
+int disk2file_2_m5(ptr,lcl)
 char *ptr;
 struct disk2file_cmd *lcl;
 {
@@ -216,7 +216,7 @@ struct disk2file_cmd *lcl;
 
   return;
 }
-m5_2_disk2file(ptr_in,lclc,lclm,ip) /* return values:
+int m5_2_disk2file(ptr_in,lclc,lclm,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */
@@ -333,7 +333,7 @@ error:
   memcpy(ip+3,"5f",2);
   return -1;
 }
-m5_scan_set_2_disk2file(ptr_in,lclc,lclm,ip) /* return values:
+int m5_scan_set_2_disk2file(ptr_in,lclc,lclm,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */

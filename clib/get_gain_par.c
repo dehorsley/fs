@@ -29,7 +29,7 @@
 #include "../include/rtelb/rtelb.h"
 #include "../include/clib/clib.h"
 
-get_gain_par(ifchain,center,fwhm,dpfu,gain,tcal)
+int get_gain_par(ifchain,center,fwhm,dpfu,gain,tcal)
      int ifchain;
      double center;
      float *fwhm, *tcal, *dpfu, *gain;

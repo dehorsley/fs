@@ -165,7 +165,7 @@ struct k4vclo_mon *lcl;
   return;
 }
 
-k4vclo_req_q(ip,itask)
+int k4vclo_req_q(ip,itask)
 int ip[5];
 int itask;
 {
@@ -187,7 +187,7 @@ int itask;
  ib_req7(ip,device,13*16+2,"RD");
 }
 
-k4vclo_req_c(ip,lclc,ivc,itask)
+int k4vclo_req_c(ip,lclc,ivc,itask)
 int ip[5];
 struct k4vclo_cmd *lclc;
 int ivc,itask;
@@ -225,7 +225,7 @@ int ivc,itask;
 
 }
 
-k4vclo_res_q(lclc,lclm,ip,itask)
+int k4vclo_res_q(lclc,lclm,ip,itask)
 struct k4vclo_cmd *lclc;
 struct k4vclo_mon *lclm;
 int ip[5];

@@ -201,7 +201,7 @@ struct m5state *state;
 
   return 0;
 }
-m5time_encode(ptr,time,state)
+int m5time_encode(ptr,time,state)
 char *ptr;
 struct m5time *time;
 struct m5state *state;
@@ -239,7 +239,7 @@ struct m5state *state;
   }
 
 }
-m5sprintf(ptr,format,value,state)
+int m5sprintf(ptr,format,value,state)
 char *ptr, *format;
 void *value;
 struct m5state *state;
@@ -269,7 +269,7 @@ struct m5state *state;
 
 }
 
-m5key_encode(ptr,keys,nkeys,value,state)
+int m5key_encode(ptr,keys,nkeys,value,state)
 char *ptr;
 char *keys[ ];
 int nkeys;
@@ -291,7 +291,7 @@ struct m5state *state;
   }
 }
 
-m5state_encode(ptr,state)
+int m5state_encode(ptr,state)
 char *ptr;
 struct m5state *state;
 {      
@@ -302,7 +302,7 @@ struct m5state *state;
       strcpy(ptr,"?");
   }
 }
-m5key_decode(ptr,value,keys,nkeys,state)
+int m5key_decode(ptr,value,keys,nkeys,state)
 char *ptr;
 char *keys[ ];
 int nkeys;

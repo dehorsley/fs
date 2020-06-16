@@ -353,7 +353,7 @@ struct mk5b_mode_mon *lclm;
    return;
 }
 
-mk5b_mode_2_m5(ptr,lclc,itask)
+int mk5b_mode_2_m5(ptr,lclc,itask)
 char *ptr;
 struct mk5b_mode_cmd *lclc;
 int itask;
@@ -418,7 +418,7 @@ int itask;
   return;
 }
 
-m5_2_mk5b_mode(ptr_in,lclc,lclm,itask,ip) /* return values:
+int m5_2_mk5b_mode(ptr_in,lclc,lclm,itask,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */

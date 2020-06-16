@@ -36,7 +36,7 @@
 
 char *m5trim();
 
-m5_2_dot(ptr_in,lclm,ip) /* return values:
+int m5_2_dot(ptr_in,lclm,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */

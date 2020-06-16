@@ -180,7 +180,7 @@ struct k4vc_mon *lcl;
   return;
 }
 
-k4vc_req_q(ip,itask)
+int k4vc_req_q(ip,itask)
 int ip[5];
 int itask;
 {
@@ -215,7 +215,7 @@ int itask;
 
 }
 
-k4vc_req_c(ip,lclc,ivc,itask)
+int k4vc_req_c(ip,lclc,ivc,itask)
 int ip[5];
 struct k4vc_cmd *lclc;
 int ivc,itask;
@@ -263,7 +263,7 @@ int ivc,itask;
 
 }
 
-k4vc_res_q(lclc,lclm,ip,itask)
+int k4vc_res_q(lclc,lclm,ip,itask)
 struct k4vc_cmd *lclc;
 struct k4vc_mon *lclm;
 int ip[5];

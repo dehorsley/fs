@@ -56,7 +56,7 @@ struct mk6_disk_pos_mon *lcl;
   return;
 }
 
-m5_2_mk6_disk_pos(ptr_in,lclm,ip,who) /* return values:
+int m5_2_mk6_disk_pos(ptr_in,lclm,ip,who) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */

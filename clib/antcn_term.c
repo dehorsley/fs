@@ -24,7 +24,7 @@
 static int first=1;
 static int value=-1;
 
-antcn_term(out)
+int antcn_term(out)
 int *out;
 {
   char *term;

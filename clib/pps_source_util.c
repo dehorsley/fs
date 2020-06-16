@@ -36,7 +36,7 @@
 
 char *m5trim();
 
-m5_2_pps_source(ptr_in,lclc,ip) /* return values:
+int m5_2_pps_source(ptr_in,lclc,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */

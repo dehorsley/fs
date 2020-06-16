@@ -128,7 +128,7 @@ struct k4pcalports_mon *lclm;
 }
 
 
-k4pcalports_req_q(ip)
+int k4pcalports_req_q(ip)
 int ip[5];
 {
 
@@ -136,7 +136,7 @@ int ip[5];
  ib_req7(ip,device,20,"PCB?");
 
 }
-k4pcalports_req_c(ip,lclc)
+int k4pcalports_req_c(ip,lclc)
 int ip[5];
 struct k4pcalports_cmd *lclc;
 {
@@ -161,7 +161,7 @@ struct k4pcalports_cmd *lclc;
 
 }
 
-k4pcalports_res_q(lclc,lclm,ip)
+int k4pcalports_res_q(lclc,lclm,ip)
 struct k4pcalports_cmd *lclc;
 struct k4pcalports_mon *lclm;
 int ip[5];

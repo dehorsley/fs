@@ -152,7 +152,7 @@ struct disk_record_mon *lcl;
    return;
 }
 
-disk_record_2_m5(ptr,lcl)
+int disk_record_2_m5(ptr,lcl)
 char *ptr;
 struct disk_record_cmd *lcl;
 {
@@ -172,7 +172,7 @@ struct disk_record_cmd *lcl;
 
   return;
 }
-m5_2_disk_record(ptr_in,lclc,lclm,ip) /* return values:
+int m5_2_disk_record(ptr_in,lclc,lclm,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */

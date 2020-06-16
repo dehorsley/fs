@@ -152,7 +152,7 @@ struct data_check_mon *lcl;
   return;
 }
 
-m5_2_data_check(ptr_in,lclm,ip) /* return values:
+int m5_2_data_check(ptr_in,lclm,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */

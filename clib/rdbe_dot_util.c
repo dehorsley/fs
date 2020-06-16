@@ -36,7 +36,7 @@
 
 char *m5trim();
 
-rdbe_2_dot(ptr_in,lclm,ip) /* return values:
+int rdbe_2_dot(ptr_in,lclm,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */

@@ -197,7 +197,7 @@ struct k3fm_mon *lcl;
 
 }
 
-k3fm_req_q(ip)
+int k3fm_req_q(ip)
 int ip[5];
 {
  ib_req7(ip,device,20,"INP?");
@@ -211,7 +211,7 @@ int ip[5];
  ib_req8(ip,device,20,"STAT=*");
 
 }
-k3fm_req_c(ip,lclc,new_aux)
+int k3fm_req_c(ip,lclc,new_aux)
 int ip[5];
 struct k3fm_cmd *lclc;
 int new_aux;
@@ -322,7 +322,7 @@ int new_aux;
   }
 }
 
-k3fm_res_q(lclc,lclm,ip)
+int k3fm_res_q(lclc,lclm,ip)
 struct k3fm_cmd *lclc;
 struct k3fm_mon *lclm;
 int ip[5];

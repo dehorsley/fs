@@ -19,7 +19,7 @@
  */
 #include <string.h>
 
-setMK4FMrec(val,ip)
+int setMK4FMrec(val,ip)
 int val;
 int ip[5];
 {

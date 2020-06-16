@@ -145,7 +145,7 @@ struct in2net_mon *lcl;
    return;
 }
 
-in2net_2_m5(ptr,lcl)
+int in2net_2_m5(ptr,lcl)
 char *ptr;
 struct in2net_cmd *lcl;
 {
@@ -165,7 +165,7 @@ struct in2net_cmd *lcl;
 
   return;
 }
-m5_2_in2net(ptr_in,lclc,lclm,ip) /* return values:
+int m5_2_in2net(ptr_in,lclc,lclm,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */

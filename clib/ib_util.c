@@ -23,7 +23,7 @@
 
 #define MAX_BUF 512
 
-ib_req1(ip,device)
+int ib_req1(ip,device)
 int ip[5];
 char device[2];
 /* read ASCII */
@@ -37,7 +37,7 @@ char device[2];
   ip[1]++;
 }
 
-ib_req2(ip,device,ptr)
+int ib_req2(ip,device,ptr)
 int ip[5];
 char device[2];
 char ptr[];
@@ -56,7 +56,7 @@ char ptr[];
   ip[1]++;
 }
 
-ib_req3(ip,device)
+int ib_req3(ip,device)
 int ip[5];
 char device[2];
 /* read binary */
@@ -70,7 +70,7 @@ char device[2];
   ip[1]++;
 }
 
-ib_req4(ip,device,ptr,n)
+int ib_req4(ip,device,ptr,n)
 int ip[5];
 char device[2];
 char ptr[];
@@ -88,7 +88,7 @@ int n;
   ip[1]++;
 }
 
-ib_req5(ip,device,ilen)
+int ib_req5(ip,device,ilen)
 int ip[5];
 char device[2];
 int ilen;
@@ -104,7 +104,7 @@ int ilen;
   ip[1]++;
 }
 
-ib_req6(ip,device,ilen)
+int ib_req6(ip,device,ilen)
 int ip[5];
 char device[2];
 int ilen;
@@ -120,7 +120,7 @@ int ilen;
   ip[1]++;
 }
 
-ib_req7(ip,device,ilen,ptr)
+int ib_req7(ip,device,ilen,ptr)
 int ip[5];
 char device[2];
 int ilen;
@@ -141,7 +141,7 @@ char ptr[];
   ip[1]++;
 }
 
-ib_req8(ip,device,ilen,ptr)
+int ib_req8(ip,device,ilen,ptr)
 int ip[5];
 char device[2];
 int ilen;
@@ -162,7 +162,7 @@ char ptr[];
   ip[1]++;
 }
 
-ib_req9(ip,device)
+int ib_req9(ip,device)
 int ip[5];
 char device[2];
 /* bus status */
@@ -175,7 +175,7 @@ char device[2];
   cls_snd(ip+0,buffer,4);
   ip[1]++;
 }
-ib_req10(ip,device)
+int ib_req10(ip,device)
 int ip[5];
 char device[2];
 /* poll for SRQ */
@@ -189,7 +189,7 @@ char device[2];
   ip[1]++;
 }
 
-ib_req11(ip,device,ilen,ptr)
+int ib_req11(ip,device,ilen,ptr)
 int ip[5];
 char device[2];
 int ilen;
@@ -209,7 +209,7 @@ char ptr[];
   cls_snd(ip+0,buffer,6+nch);
   ip[1]++;
 }
-ib_req12(ip,device)
+int ib_req12(ip,device)
 int ip[5];
 char device[2];
 /* device clear */
@@ -224,7 +224,7 @@ char device[2];
 }
 
 
-ib_res_ascii(out,max,ip)
+int ib_res_ascii(out,max,ip)
 char *out;
 int *max;
 int ip[5];
@@ -242,7 +242,7 @@ int ip[5];
     ip[1]--;
   }
 }
-ib_res_bin(out,max,ip)
+int ib_res_bin(out,max,ip)
 char *out;
 int ip[5];
 int *max;
@@ -258,7 +258,7 @@ int *max;
     ip[1]--;
   }
 }
-ib_res_time(centisec,ip)
+int ib_res_time(centisec,ip)
 int centisec[2];
 int ip[5];
 {

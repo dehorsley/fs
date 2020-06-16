@@ -27,7 +27,7 @@
 #include "../include/params.h"
 #include "../include/fs_types.h"
 
-get_RDBEtime(centisec,fm_tim,ip,to,iRDBE,vdif_epoch)
+int get_RDBEtime(centisec,fm_tim,ip,to,iRDBE,vdif_epoch)
 int centisec[6];
 int fm_tim[6];
 int ip[5];                          /* ipc array */

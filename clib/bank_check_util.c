@@ -35,7 +35,7 @@
 #define MAX_OUT 256
 #define BUFSIZE 2048
 
-rtime_decode(rtime_mon,bank_set_mon,ip)
+int rtime_decode(rtime_mon,bank_set_mon,ip)
 struct rtime_mon *rtime_mon;
 struct bank_set_mon *bank_set_mon;
 int ip[5];
@@ -87,7 +87,7 @@ error:
       return -1;
 
 }
-bank_set_check(done,ip)
+int bank_set_check(done,ip)
 int *done;
 int ip[5];
 {
@@ -149,7 +149,7 @@ error:
 
 }
 
-m5_2_rtime(ptr_in,lclm,ip) /* return values:
+int m5_2_rtime(ptr_in,lclm,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */
@@ -306,7 +306,7 @@ error:
       memcpy(ip+3,"5b",2);
       return -1;
 }
-m5_2_bank_set(ptr_in,lclm,ip) /* return values:
+int m5_2_bank_set(ptr_in,lclm,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */
@@ -409,7 +409,7 @@ error:
       return -1;
 }
 
-m5_2_vsn(ptr_in,lclm,ip) /* return values:
+int m5_2_vsn(ptr_in,lclm,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */

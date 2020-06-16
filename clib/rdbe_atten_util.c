@@ -219,7 +219,7 @@ struct rdbe_atten_mon *lclm;
   if(*count>0) *count++;
   return;
 }
-rdbe_atten_2_rdbe(ptr,lcl)
+int rdbe_atten_2_rdbe(ptr,lcl)
 char *ptr;
 struct rdbe_atten_cmd *lcl;
 {
@@ -242,7 +242,7 @@ struct rdbe_atten_cmd *lcl;
 
   return;
 }
-rdbe_2_rdbe_atten(ptr_in,lclm,ip) /* return values:
+int rdbe_2_rdbe_atten(ptr_in,lclm,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error
 				  */

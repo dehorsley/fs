@@ -25,7 +25,7 @@
 #include "../include/req_ds.h"
 #include "../include/res_ds.h"
 
-get_vtime(centisec,fm_tim,ip,to)
+int get_vtime(centisec,fm_tim,ip,to)
 int centisec[6];
 int fm_tim[6];
 int ip[5];                          /* ipc array */
