@@ -33,10 +33,14 @@
 #include <getopt.h>
 #include <stdbool.h>
 
-#include "../include/ipckeys.h"
-#include "../include/params.h"
-#include "../include/fs_types.h"
+#include "../include/clib/clib.h"
 #include "../include/fscom.h"
+#include "../include/ipckeys.h"
+#include "../include/rtelb/rtelb.h"
+
+int parse(char *line2, int maxl, char *line, int *ampr, int *les, char **name);
+int start_prog(char **argv, int w);
+void statusprt(int status);
 
 #define MAX_PIDS    60
 #define MAX_LINE    82
@@ -59,11 +63,7 @@
 /* rdg  010529  Interchange of 'n' for nowait and 'w' for wait      */
 /*              status for consistency.                             */
 
-int cls_alc();
-void shm_att(),sem_att(),cls_ini(),brk_ini();
-int parse();
-char *fgets();
-FILE *fopen(), *tee;
+FILE *tee;
 static void nullfcn();
 
 void setup_ids();
@@ -107,7 +107,7 @@ const char *usage_long_str = USAGE_SHORT "\n"
 "  -f, --foreground    run the Field System in foreground without server\n" 
 ;
 
-main(int argc_in,char *argv_in[])
+int main(int argc_in,char *argv_in[])
 {
     int i, ampr, wpid, status, size, err, okay, nsems;
     int les=-1, lesm=-1, lesam=-1, lesm2=-1;
