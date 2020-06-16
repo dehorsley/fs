@@ -22,9 +22,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../include/rclcn_res_ds.h"
-
-#include "../rclco/rcl/rcl_def.h"
+#include "../include/clib/clib.h"
 
 void opn_rclcn_res(buffer,ip)      /* initialize (open) response structs */
 struct rclcn_res_buf *buffer;        /* work struct */

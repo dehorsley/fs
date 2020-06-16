@@ -24,8 +24,7 @@
 #include <sys/sem.h>
 #include <stdlib.h>
 
-#include "../include/params.h"
-#include "../include/fs_types.h"
+#include "../include/clib/clib.h"
 #include "../include/fscom.h"
 
 extern struct fscom *shm_addr;

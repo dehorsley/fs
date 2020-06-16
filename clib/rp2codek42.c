@@ -20,6 +20,7 @@
 /* rp2codek42.c determines recorder port inputs for k42 rack */
 
 #include <stdio.h>
+#include <string.h>
 
 static char *channel[ 32]= {
   "a1l",  "a1u",

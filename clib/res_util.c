@@ -20,7 +20,7 @@
 /* response buffer utilities */
 
 #include <string.h>
-#include "../include/res_ds.h"
+#include "../include/clib/clib.h"
 
 void opn_res(buffer,ip)      /* initialize (open) response structs */
 struct res_buf *buffer;        /* work struct */

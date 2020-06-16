@@ -19,8 +19,7 @@
  */
 /* log formatting for vlba et and rw/ff commands */
 #include <string.h>
-#include "../include/params.h"
-#include "../include/res_ds.h"
+#include "../include/clib/clib.h"
 
 void mvdis_v(ip,ibuf,nch)
 int ip[5];

@@ -19,6 +19,8 @@
  */
 #include <string.h>
 
+#include "../include/clib/clib.h"
+
 int setMK4FMrec(val,ip)
 int val;
 int ip[5];

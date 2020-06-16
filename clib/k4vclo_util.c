@@ -20,6 +20,7 @@
 /* k4 VC LO buffer parsing utilities */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <limits.h>

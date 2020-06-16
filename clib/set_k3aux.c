@@ -21,6 +21,7 @@
 
 #include <string.h>
 #include <sys/types.h>
+#include <ctype.h>
 
 #include "../include/params.h"
 #include "../include/fs_types.h"

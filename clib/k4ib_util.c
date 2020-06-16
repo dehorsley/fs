@@ -22,8 +22,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
-#include "../include/params.h"
-#include "../include/fs_types.h"
+#include <ctype.h>
+
+#include "../include/clib/clib.h"
 
 #define WR   0
 #define RD   1

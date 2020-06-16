@@ -27,8 +27,7 @@
 #include <string.h>
 #include <sys/types.h>
 
-#include "../include/params.h"
-#include "../include/fs_types.h"
+#include "../include/clib/clib.h"
 
 static struct req_rec request[2];        /* request records set-up by dtlkup */
 static char dev1[2],dev2[2];

@@ -20,6 +20,7 @@
 /* rp2code.c determines recorder port inputs */
 
 #include <stdio.h>
+#include <string.h>
 
 static char *channel[ 28]= {
   "1l",  "1u",

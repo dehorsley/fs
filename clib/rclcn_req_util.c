@@ -21,10 +21,7 @@
 
 #include <string.h>
 #include <sys/types.h>
-#include "../include/rclcn_req_ds.h"
-
-#include "../rclco/rcl/rcl_def.h"
-#include "../rclco/rcl/rcl_cmd.h"
+#include "../include/clib/clib.h"
 
 void ini_rclcn_req(buffer)               /* initialize buffer */
 struct rclcn_req_buf *buffer;

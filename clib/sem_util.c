@@ -21,6 +21,8 @@
 #include <sys/ipc.h>    /* interprocess communications header file */
 #include <sys/sem.h>    /* shared memory header file */
 
+#include "../include/clib/clib.h"
+
 static int semid = 0;
 
 int sem_get( key, nsems)

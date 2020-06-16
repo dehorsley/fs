@@ -22,8 +22,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
-#include "../include/params.h"
-#include "../include/fs_types.h"
+#include "../include/clib/clib.h"
 
 #include "../rclco/rcl/rcl_def.h"  /* traverse argv array */
 

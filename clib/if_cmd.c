@@ -19,6 +19,7 @@
  */
 #include <string.h>
 #include <stdio.h>
+#include <ctype.h>
 
 #include "../include/params.h"
 #include "../include/fs_types.h"

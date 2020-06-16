@@ -3,6 +3,7 @@
 
 #include "../../poclb/novas.h"
 #include "../pmodel.h"
+#include "../params.h"
 #include "../fs_types.h"
 
 /* poclb/cnvrt.c */

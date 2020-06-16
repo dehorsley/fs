@@ -28,8 +28,7 @@
 #include <math.h>
 
 #include "../include/macro.h"
-#include "../include/params.h"
-#include "../include/fs_types.h"
+#include "../include/clib/clib.h"
 #include "../include/fscom.h"
 
 /* global variables/definitions */
