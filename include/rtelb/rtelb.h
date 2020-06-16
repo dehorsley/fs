@@ -34,8 +34,4 @@ clock_t rte_times(struct tms *buf);
 void secs2rte(int *secs, int it[5]);
 /* rtelb/secs_time.c */
 void secs_times(int it[5], int it6);
-/* rtelb/tesths.c */
-int main(void);
-/* rtelb/testusl.c */
-int main(void);
 #endif

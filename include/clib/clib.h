@@ -260,7 +260,6 @@ void maSTAform4(struct form4_cmd *lclc, struct form4_mon *lclm, char *buff);
 void maSHOform4(struct form4_cmd *lclc, char *buff);
 void maSSTform4(struct form4_cmd *lclc, char *buff);
 /* clib/fr2bits.c */
-int main(void);
 int freq2bits(int freq);
 int freq2bitsx(int freq);
 int bits2freq(unsigned int bits);
@@ -839,7 +838,6 @@ void mc72tape(struct tape_mon *lcl, unsigned data);
 void mc73tape(struct tape_mon *lcl, unsigned data);
 void mc74tape(struct tape_mon *lcl, unsigned data);
 /* clib/tflt.c */
-int main(void);
 /* clib/tpicd_util.c */
 int tpicd_dec(struct tpicd_cmd *lcl, int *count, char *ptr);
 void tpicd_enc(char *output, int *count, struct tpicd_cmd *lcl);
