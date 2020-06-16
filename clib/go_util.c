@@ -38,7 +38,6 @@ int go_get( key, nsems)
 key_t   key;
 int     nsems;
 {
-  void sem_take(),sem_put();
   int iret, i;
 
   sem_take( SEM_GO);
@@ -65,8 +64,7 @@ int go_take(name, flags)
 char name[5];
 int flags;
 {
-    int isem, semid_nb();
-    void semid_take();
+    int isem;
 
 /*    printf("go_take enter, name %5.5s flags %d \n",name,flags); */
     isem=go_find(name);
@@ -87,7 +85,6 @@ void go_put(name)
 char name[5];
 {
     int  isem;
-    void semid_put();
 
      isem=go_find(name);
 
@@ -98,7 +95,7 @@ char name[5];
 int go_test(name)
 char name[5];
 {
-    int semid_val(), isem, iret;
+    int isem, iret;
 
 /*    printf(" name %5.5s\n",name);*/
 
@@ -113,7 +110,6 @@ char name[5];
 static int go_find( name)
 char name[5];
 {
-    void sem_take(), sem_put();
     int i, isem;
 
     sem_take( SEM_GO);

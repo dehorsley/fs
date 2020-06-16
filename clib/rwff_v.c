@@ -41,15 +41,12 @@ int *ierr;
       int lerr;
       int verr;
       int ichold;
-      int vacuum();
 
       int i,indx;
 
       struct req_buf buffer;
       struct req_rec request;
       struct venable_cmd lcl;
- 
-      void venable81mc();
 
       if(*isub<10) 
 	indx=0;

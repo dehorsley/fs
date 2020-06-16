@@ -26,8 +26,6 @@
 #include "../include/params.h"
 #include "../include/fs_types.h"
 
-char *m5trim();
-
 void disk_serial_mon(output,count,lcl)
 char *output;
 int *count;

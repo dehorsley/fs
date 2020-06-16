@@ -28,8 +28,6 @@
 
 #define BUFSIZE 2048
 
-int daymy();
-
 int get_fila10gtime(centisec,fm_tim,ip,to,iDBBC)
 int centisec[6];
 int fm_tim[6];

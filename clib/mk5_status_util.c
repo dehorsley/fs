@@ -32,9 +32,6 @@
 #include "../include/shm_addr.h"      /* shared memory pointer */
 #include "../include/clib/clib.h"
 
-
-extern char* m5trim(char*);
-
 /* Note: I wouldn't have mind a ".h" file with error code #define's in */
 
 /*
@@ -122,8 +119,7 @@ void mk5_status_replace_colons(char* ptr) {
 
 /* Execute 1 Mark5 command and get its reply */
 int mk5_status_mk5cn_exec(int* ip, const char* cmd, char* buf, const size_t bufsz) {
-    int   class = 0;
-    void   skd_run(), skd_par();      /* program scheduling utilities */
+    int   class = 0;/* program scheduling utilities */
 
     /* put command in shmem and prepare ip array for mk5cn */
     cls_snd(&class, cmd, strlen(cmd), 0, 0);

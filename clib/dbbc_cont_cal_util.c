@@ -36,7 +36,7 @@ struct dbbc_cont_cal_cmd *lcl;
 int *count, polarity_control;
 char *ptr;
 {
-    int ierr, ind, arg_key();
+    int ierr, ind;
 
     int idefault;
 

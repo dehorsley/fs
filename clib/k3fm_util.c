@@ -56,7 +56,7 @@ struct k3fm_cmd *lcl;
 int *new_aux,*count;
 char *ptr;
 {
-    int ierr, arg_int();
+    int ierr;
 
     ierr=0;
     if(ptr == NULL) ptr="";

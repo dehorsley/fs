@@ -41,12 +41,7 @@ int *ierr, indx;
   struct req_buf buffer;        /* mcbcn request buffer */
   struct res_buf rbuffer;
   struct res_rec response;
-  struct tape_mon lcl;
-
-  void get_res(), opn_res();
-  void mc73tape();     /* tape utility */
-  void ini_req(), add_req(), end_req(); /*mcbcn request utilities */
-  void skd_run(), skd_par();      /* program scheduling utilities */
+  struct tape_mon lcl;/* program scheduling utilities */
 
   if ((shm_addr->equip.drive[indx] == VLBA &&
        shm_addr->equip.drive_type[indx] == VLBA2)||

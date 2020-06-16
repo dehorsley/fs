@@ -58,7 +58,7 @@ struct lo_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, arg_key(), arg_int();
+    int ierr;
     int len, dum, i;
     static int lo;
 

@@ -42,7 +42,7 @@ struct dist_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, ind, arg_key();
+    int ierr, ind;
 
     ierr=0;
     if(ptr == NULL) ptr="";

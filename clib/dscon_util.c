@@ -28,12 +28,7 @@
 #define NUL	0x00
 #define ACK	0x06
 #define BEL	0x07
-#define NAK	0x15
-
-/* function prototypes */
-void cls_snd();				/* class buffer routines */
-int cls_rcv();
-void skd_run(), skd_par();
+#define NAK	0x15				/* class buffer routines */
 
 void dscon_snd(lcl,ip)
   struct ds_cmd *lcl;

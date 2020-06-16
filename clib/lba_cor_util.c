@@ -32,10 +32,6 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 
-/* function prototypes */
-int arg_key();
-int arg_int();
-
 /* global variables/definitions */
 static char *cr_key[ ]={"at","mb"};
 static char *op_key[ ]={"bsu","bsl","ftu","ftl","32","64","usb","lsb"};

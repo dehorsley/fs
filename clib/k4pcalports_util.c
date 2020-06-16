@@ -41,7 +41,7 @@ struct k4pcalports_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, arg_int();
+    int ierr;
     int type, ipos;
 
     ierr=0;

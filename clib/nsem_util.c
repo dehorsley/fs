@@ -32,13 +32,10 @@ extern struct fscom *shm_addr;
 
 static int semid = 0;
 
-int nsem_find();
-
 int nsem_get( key, nsems)
 key_t   key;
 int     nsems;
 {
-  void sem_take(),sem_put();
   int iret,i;
 
   sem_take( SEM_SEM);
@@ -65,8 +62,7 @@ int nsem_take(name, flags)
 char name[5];
 int flags;
 {
-    int nsem_find(), isem, semid_nb();
-    void semid_take();
+    int isem;
 
 /*    printf("nsem_take enter, name %5.5s flags %d \n",name,flags); */
     isem=nsem_find(name);
@@ -85,8 +81,7 @@ int flags;
 void nsem_put(name)
 char name[5];
 {
-    int nsem_find(), semid_val(), isem;
-    void semid_put();
+    int isem;
 
     isem=nsem_find(name);
 
@@ -97,7 +92,7 @@ char name[5];
 int nsem_test(name)
 char name[5];
 {
-    int nsem_find(), semid_val(), isem, iret;
+    int isem, iret;
 
 /*    printf(" name %5.5s\n",name);*/
 
@@ -112,7 +107,6 @@ char name[5];
 int nsem_find( name)
 char name[5];
 {
-    void sem_take(), sem_put();
     int i, isem;
 
     sem_take( SEM_SEM);

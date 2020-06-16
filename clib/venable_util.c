@@ -60,7 +60,7 @@ struct venable_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, ind, arg_key(), ivalue;
+    int ierr, ind, ivalue;
     int odd, even;
 
     ierr=0;

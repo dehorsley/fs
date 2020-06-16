@@ -45,7 +45,7 @@ struct satellite_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, arg_key(), arg_int();
+    int ierr;
     int i, j, k;
     double freq;
 

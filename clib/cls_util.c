@@ -79,7 +79,6 @@ key_t key;
 {
 int	status, i;
 int    msgtype;
-void    sem_take(),sem_put();
 struct  cls_buf msg;
 
 msqid = msgget( key, 0);
@@ -129,7 +128,6 @@ size_t  nchars;
 struct  cls_buf msg;
 int    msgtype;
 char    *s1;
-void sem_take(), sem_put();
 
   if(length > MAX_TEXT) {
     length=MAX_TEXT;
@@ -164,7 +162,6 @@ if ( status == -1 ) {
 int cls_alc()
 {
 int    class;
-void    sem_take(), sem_put();
 
 sem_take( SEM_CLS);
 class=cls_alc_s();
@@ -213,7 +210,6 @@ ssize_t nchars;
 int     sb, sc, nw;
 struct  cls_buf msg;
 char *s1;
-void sem_take(), sem_put();
 
    sb= 0040000 & class;
    sc= 0020000 & class;
@@ -288,7 +284,6 @@ void cls_clr( class)
 int    class;
 {
 struct  cls_buf msg;
-void sem_take(), sem_put();
 
    class &= ~ 0160000;
    if(class<=0) return;

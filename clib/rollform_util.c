@@ -36,7 +36,7 @@ struct form4_cmd *lcl;
 int *count;
 char *ptr;
 {
-  int ierr, arg_key(), code, i, j, irhd, ihd;
+  int ierr, code, i, j, irhd, ihd;
     static int istk, itrk;
 
     ierr=0;

@@ -47,7 +47,7 @@ int *reset;
 int *count;
 char *ptr;
 {
-    int ierr, arg_key(), arg_int();
+    int ierr;
 
     ierr=0;
     if(ptr == NULL) ptr="";

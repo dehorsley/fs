@@ -32,11 +32,6 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 
-/* function prototypes */
-int arg_key();
-int arg_dble();
-int arg_key_flt();
-
 /* global variables/definitions */
 static char *sb_key[ ]={"usb","lsb"};
 static char *bw_key[ ]={"0.0625","0.125","0.25","0.5","1","2","4","8","16","32","64"};

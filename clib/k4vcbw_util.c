@@ -57,7 +57,7 @@ struct k4vcbw_cmd *lcl;
 int *count,itask;
 char *ptr;
 {
-    int ierr, arg_int();
+    int ierr;
     int type, ipos;
 
     ierr=0;

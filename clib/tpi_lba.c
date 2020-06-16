@@ -33,8 +33,6 @@
 #include "../include/poclb/poclb.h"
 #include "../include/clib/clib.h"
 
-int lba_tpi_from_level(unsigned short level);
-
 static char ch[ ]={"123456789abcdef"};
 static char *lwhat[ ]={
 "p1","p2","p3","p4","p5","p6","p7","p8","p9","pa","pb","pc","pd","pe","pf"};

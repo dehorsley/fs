@@ -42,7 +42,7 @@ int *count;
 char *ptr;
 int indx;
 {
-    int ierr, arg_key();
+    int ierr;
     int feet;
 
     ierr=0;
@@ -112,8 +112,6 @@ struct tape_mon *lcl;
     int itemp;
     double outvac;
     char feet[6];
-    void int2str(); 
-    void flt2str();
 
     output=output+strlen(output);
 

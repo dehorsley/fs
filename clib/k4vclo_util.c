@@ -43,8 +43,7 @@ struct k4vclo_cmd *lcl;
 int *ivc,*count,itask;
 char *ptr;
 {
-    int ierr, arg_key(), arg_int();
-    double atof();
+    int ierr;
     char buffer[80];
     int ilen, flen, ipos;
     char *decloc, *fract;

@@ -36,7 +36,7 @@ int *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, arg_int();
+    int ierr;
 
     ierr=0;
     if(ptr == NULL) ptr="";

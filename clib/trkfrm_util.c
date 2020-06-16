@@ -31,15 +31,12 @@
 #include "../include/shm_addr.h"      /* shared memory pointer */
 #include "../include/clib/clib.h"
 
-char *code2bs();
-int bs2code();
-
 int trkfrm_dec(lcl,count,ptr)
 struct vform_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, arg_key(), code, i;
+    int ierr, code, i;
     static int itrk;
     static int kfirst = TRUE;
     static char *type;

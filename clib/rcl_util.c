@@ -25,9 +25,7 @@
 #include "../include/params.h"
 #include "../include/fs_types.h"
 
-#include "../rclco/rcl/rcl_def.h"
-
-char *arg_next(struct cmd_ds *command,int *ilast);  /* traverse argv array */
+#include "../rclco/rcl/rcl_def.h"  /* traverse argv array */
 
 int rcl_dec(struct cmd_ds *command,struct rclcn_req_buf *buffer,int *icmd)
 {

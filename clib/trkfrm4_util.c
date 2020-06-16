@@ -31,15 +31,12 @@
 #include "../include/shm_addr.h"      /* shared memory pointer */
 #include "../include/clib/clib.h"
 
-char *code2bsfo();
-int bsfo2code();
-
 int trkfrm4_dec(lcl,count,ptr)
 struct form4_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, arg_key(), code, i;
+    int ierr, code, i;
     static int itrk;
 
     ierr=0;

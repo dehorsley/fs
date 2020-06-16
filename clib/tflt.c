@@ -22,7 +22,7 @@ int main()
 {
       float val;
       int ndigit,sign,decpt;
-      char *ptr, *ecvt(), *fcvt();
+      char *ptr;
 
       val=1000.5;
       ndigit=4;

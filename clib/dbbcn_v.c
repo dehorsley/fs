@@ -43,8 +43,6 @@ static int det;
 static int ifchain;
 static struct dbbcifx_cmd savec;
 
-double dbbc_if_power(unsigned counts, int como);
-
 void dbbcn_d(device, ierr,ip)
 char device[2];                        /* device mnemonic */
 int *ierr;                             /* error return, -1 if no such device */

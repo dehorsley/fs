@@ -52,14 +52,12 @@ static char *atten_key[ ]=
 #define NAUTO_KEY sizeof(auto_key)/sizeof( char *)
 #define NATTEN_KEY sizeof(atten_key)/sizeof( char *)
 
-char *m5trim();
-
 int rdbe_atten_dec(lcl,count,ptr)
 struct rdbe_atten_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, i, arg_key();
+    int ierr, i;
     
     ierr=0;
     if(ptr == NULL) ptr="";

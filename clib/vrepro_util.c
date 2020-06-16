@@ -54,7 +54,7 @@ struct vrepro_cmd *lcl;
 int *count,indx;
 char *ptr;
 {
-    int ierr, ind, arg_key(), idflt, odd, even;
+    int ierr, ind, idflt, odd, even;
 
     ierr=0;
     if(ptr == NULL) ptr="";

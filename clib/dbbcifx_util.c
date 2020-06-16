@@ -39,7 +39,7 @@ struct dbbcifx_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, ind, arg_key();
+    int ierr, ind;
 
     int idefault;
 

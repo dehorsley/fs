@@ -95,7 +95,7 @@ struct form4_cmd *lcl;
 int *count;
 char *ptr;
 {
-  int ierr, ind, arg_key(),len,i,j,k,ivalue,ish;
+  int ierr, ind, len,i,j,k,ivalue,ish;
   unsigned mode, datain;
   int ioff, ifm;
 

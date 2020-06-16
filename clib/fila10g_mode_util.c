@@ -38,14 +38,12 @@ static char *disk_key[ ]=         { "disk_record_ok" };
 #define NSOURCE_KEY sizeof(source_key)/sizeof( char *)
 #define NDISK_KEY sizeof(disk_key)/sizeof( char *)
 
-char *m5trim();
-
 int fila10g_mode_dec(lcl,count,ptr)
 struct fila10g_mode_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, i, arg_key();
+    int ierr, i;
     float sample;
     
     ierr=0;

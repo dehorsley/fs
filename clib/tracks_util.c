@@ -36,7 +36,7 @@ struct vform_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, ind, arg_key(), code;
+    int ierr, ind, code;
     static int itrk;
 
     ierr = 0;

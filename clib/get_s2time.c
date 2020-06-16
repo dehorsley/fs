@@ -26,9 +26,6 @@
 #include "../rclco/rcl/rcl_def.h"
 #include "../include/fs_types.h"
 
-void skd_run();
-void skd_par();
-
 int get_s2time(dev,centisec,it,nanosec,ip,to)
 char dev[];
 int centisec[6];

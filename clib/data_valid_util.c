@@ -44,7 +44,7 @@ int *count;
 char *ptr;
 int kS2drive;
 {
-    int ierr, arg_key(), arg_int();
+    int ierr;
     int len;
 
     ierr=0;

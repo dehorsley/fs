@@ -45,7 +45,7 @@ struct in2net_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, i, arg_key();
+    int ierr, i;
     char source[11];
     
     ierr=0;

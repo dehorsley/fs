@@ -101,8 +101,6 @@ int get_rclcn_res_string(struct rclcn_res_buf *buffer,char *ptr)
 void clr_rclcn_res(struct rclcn_res_buf *buffer)
 /* close buffer and clear class number */
 {
-    void cls_clr();
-
     if(buffer->count >0) cls_clr(buffer->class_fs);
 
     buffer->class_fs=0;

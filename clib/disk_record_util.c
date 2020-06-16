@@ -40,14 +40,12 @@ static char *record_display_key[ ]={ "off", "on", ""};
 #define NRECORD_KEY sizeof(record_key)/sizeof( char *)
 #define NRECORD_DISPLAY_KEY sizeof(record_display_key)/sizeof( char *)
 
-char *m5trim();
-
 int disk_record_dec(lcl,count,ptr)
 struct disk_record_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, i, arg_key();
+    int ierr, i;
     
     ierr=0;
     if(ptr == NULL) ptr="";

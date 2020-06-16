@@ -36,7 +36,7 @@ struct systracks_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, arg_key(), ind;
+    int ierr, ind;
     static int idflt[]={0,1,34,35};
 
     ierr=0;

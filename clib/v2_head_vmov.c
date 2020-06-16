@@ -29,8 +29,6 @@
 #include "../include/rtelb/rtelb.h"
 #include "../include/clib/clib.h"
 
-clock_t rte_times(struct tms *);
-
 void v2_head_vmov(ihead,volt,ip,indxtp)
 int ihead;                     /* head 1-4 */
 float volt;                    /* voltage to set head to */

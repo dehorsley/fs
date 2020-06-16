@@ -32,9 +32,6 @@
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
 
-/* function prototypes */
-int arg_key();
-
 /* global variables/definitions */
 
 static char *sb_key[ ]={"usb","lsb"};

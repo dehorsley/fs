@@ -42,7 +42,7 @@ struct res_buf *buffer;        /* response buffer */
                                /* response->state==0 okay */
                                /* response->state==-1, no more */
 {
-    int idum, cls_rcv(), adv;
+    int idum, adv;
     unsigned char *ptr;
 
     if(buffer->ifc>=buffer->nchars && buffer->count > 0) {
@@ -84,8 +84,6 @@ struct res_buf *buffer;        /* response buffer */
 void clr_res(buffer)         /* close buffer and clear class number */
 struct res_buf *buffer;
 {
-    void cls_clr();
-
     if(buffer->count >0) cls_clr(buffer->class_fs);
 
     buffer->class_fs=0;

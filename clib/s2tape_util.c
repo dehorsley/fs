@@ -39,7 +39,7 @@ int position[8];
 int *count;
 char *ptr;
 {
-    int ierr, arg_key(), arg_int();
+    int ierr;
     int len;
     static int found;
 

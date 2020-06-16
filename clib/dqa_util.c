@@ -35,7 +35,7 @@ struct dqa_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, ind, arg_int();
+    int ierr, ind;
 
     ierr=0;
     if(ptr == NULL) ptr="";
@@ -83,7 +83,6 @@ float rate;
     int ind;
     static int kfirst = TRUE;
     static char *type;
-    char *code2bs();
 
     if (kfirst) {
       if(shm_addr->equip.rack == VLBA) {

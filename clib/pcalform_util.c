@@ -55,7 +55,7 @@ struct pcalform_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, arg_key(), arg_int();
+    int ierr;
     int len, dum, i, j, ch, tone;
     double freq;
     static int iconv, isb;

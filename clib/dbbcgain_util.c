@@ -39,7 +39,7 @@ struct dbbcgain_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, arg_key();
+    int ierr;
 
     int idefault;
 

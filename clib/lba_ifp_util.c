@@ -36,15 +36,6 @@
 #include "../include/rtelb/rtelb.h"
 #include "../include/clib/clib.h"
 
-/* function prototypes */
-void dscon_snd();
-int dscon_rcv();
-int run_dscon();
-int arg_dble();
-int arg_key_flt();
-int arg_key();
-void cls_clr();
-
 /* global variables/definitions */
 static char *bw_key[ ]={"0.0625","0.125","0.25","0.5","1","2","4","8","16","32","64"};
 static char *md_key[ ]={"none","scb","dsb","acb","sc1","ds2","ds4","ds6","ac1"};

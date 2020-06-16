@@ -40,14 +40,12 @@ static char *status_key[ ]={ "off", "pending", "recording","flushing"};
 #define NACTION_KEY sizeof(action_key)/sizeof( char *)
 #define NSTATUS_KEY sizeof(status_key)/sizeof( char *)
 
-char *m5trim();
-
 int mk6_record_dec(lcl,count,ptr)
 struct mk6_record_cmd *lcl;
 int *count;
 char *ptr;
 {
-  int ierr, i, arg_key();
+  int ierr, i;
   int dum;
   double ddum;
 

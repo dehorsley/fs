@@ -41,7 +41,7 @@ int *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, arg_key(), arg_int();
+    int ierr;
     int len;
 
     ierr=0;

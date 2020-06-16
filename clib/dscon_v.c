@@ -33,8 +33,6 @@
 #include "../include/shm_addr.h"
 #include "../include/clib/clib.h"
 
-int lba_tpi_from_level(unsigned short level);
-
 static struct ds_cmd lcl;                 /* request record set-up by _d */
                                           /* and used _v */
 static char dev[2];                       /* saved device name */

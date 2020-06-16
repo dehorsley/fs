@@ -68,8 +68,7 @@ struct vst_cmd *lcl;
 int *count,indx;
 char *ptr;
 {
-    int ierr, arg_key();
-    int arg_key_flt();
+    int ierr;
     int i;
     static int kfirst=TRUE;
 

@@ -55,7 +55,7 @@ struct k4rec_mode_cmd *lclc;
 int *count;
 char *ptr;
 {
-    int ierr, arg_key(), arg_int();
+    int ierr;
     int len;
 
     int i;

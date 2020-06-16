@@ -30,8 +30,6 @@
 
 void setup_ids()
 {
-    void sem_att(), skd_att(), shm_att(), cls_att(), brk_att();
-
     setvbuf(stdout, NULL, _IONBF, BUFSIZ);
     setvbuf(stderr, NULL, _IONBF, BUFSIZ);
 

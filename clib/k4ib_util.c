@@ -33,9 +33,7 @@
 #define CL   5
 
 #define AS   0
-#define BN   1
-
-char *arg_next(struct cmd_ds *command,int *ilast);  /* traverse argv array */
+#define BN   1  /* traverse argv array */
 
 int k4ib_dec(struct cmd_ds *command,int ip[5], int *ireq)
 {

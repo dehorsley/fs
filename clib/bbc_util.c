@@ -46,14 +46,12 @@ struct bbc_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, ind, arg_key();
-    int arg_key_flt();
-    double atof(), gain;
-    int bblvcode();
+    int ierr, ind;
+    double gain;
     char buffer[80];
     int ilen, jlen, klen, mlen;
     char *decloc, *ctemp;
-    int freq, ifreq, freq2bbc();
+    int freq, ifreq;
     int i;
 
     ierr=0;
@@ -174,8 +172,7 @@ int *count;
 struct bbc_cmd *lcl;
 {
     int ind, ivalue, ivalue2;
-    int bbc2freq(),freq;
-    double bblvdB();
+    int freq;
 
     output=output+strlen(output);
 

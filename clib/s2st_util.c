@@ -48,7 +48,7 @@ struct s2st_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, arg_key(), arg_int();
+    int ierr;
     int len;
     static int old_speed;
 

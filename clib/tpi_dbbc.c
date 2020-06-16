@@ -36,8 +36,6 @@
 
 #define BUFSIZE 512
 
-double dbbc_if_power(unsigned counts, int como);
-
 static char ch[ ]={"abcd"};
 static char *lwhat[ ]={
 "1l","2l","3l","4l","5l","6l","7l","8l","9l","al","bl","cl","dl","el","fl","gl",

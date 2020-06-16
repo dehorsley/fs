@@ -35,7 +35,7 @@ struct wvolt_cmd *lcl;
 int *count;
 char *ptr;
 {
-    int ierr, ind, arg_float();
+    int ierr, ind;
 
     ierr=0;
     if(ptr == NULL) ptr="";

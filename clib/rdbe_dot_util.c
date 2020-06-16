@@ -34,8 +34,6 @@
 #include "../include/poclb/poclb.h"
 #include "../include/clib/clib.h"
 
-char *m5trim();
-
 int rdbe_2_dot(ptr_in,lclm,ip) /* return values:
 				  *  0 == no error
 				  *  0 != error

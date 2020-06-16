@@ -22,9 +22,6 @@
 :: baseband converter bblvdB
 */
 
-/* internals */
-int bblvcode ();	/* return code for given level */
-
 /* lookup table for level conversions */
 static double table[] = 
   { -99.99, -36.16, -30.14, -26.62, -24.12, -22.18, -20.60, -19.26, 

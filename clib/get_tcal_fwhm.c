@@ -29,8 +29,6 @@
 #include "../include/shm_addr.h"      /* shared memory pointer */
 #include "../include/clib/clib.h"
 
-float flux_val();
-
 static float bw[ ]={0.0,0.125,0.250,0.50,1.0,2.0,4.0}; 
 static float bw4[ ]={0.0,0.125,16.0,0.50,8.0,2.0,4.0};
 static float bw_vlba[ ]={0.0625,0.125,0.25,0.5,1.0,2.0,4.0,8.0,16.0, 32.0};
@@ -192,7 +190,6 @@ int *ierr;
 	  if(ifchain<1||ifchain>4)
 	    ifchain=0;
 	  if(ifchain!=0) {
-	    int bbc2freq();
 	    float freq, bbcbw;
 	    
 	    freq=bbc2freq(shm_addr->bbc[i%MAX_BBC].freq)/100.0;

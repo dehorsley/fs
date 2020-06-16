@@ -29,8 +29,6 @@
 #include "../include/rtelb/rtelb.h"
 #include "../include/clib/clib.h"
 
-clock_t rte_times(struct tms *);
-
 void head_vmov(ihead,idir,ispdhd,jm,ip,indxtp)
 int ihead;                     /* head 1-4 */
 int idir;                      /* direction (0|1 = SLOW|FAST) */

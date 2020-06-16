@@ -20,7 +20,7 @@
 int main()
 {
     int i,freq, bits, bits2, freq2;
-    int freq2bits();bits2freq();
+    bits2freq();
 
     for (i=1;i<=0xFFFFF;i++) {
         bits=freq2bits(i);

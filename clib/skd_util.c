@@ -65,7 +65,6 @@ static int ipr[5] = { 0, 0, 0, 0, 0};
 static int mtype();
 static void nullfcn();
 static void skd_end_to();
-void skd_end();
 static int skd_run_arg_cls_to(char *name, char w, int ip[5], char *arg,
 			  char nsem[6],unsigned to, int *run_index);
 
@@ -759,7 +758,6 @@ static void nullfcn(sig)
 int sig;
 {
     int i;
-    void skd_run();
 
     if(signal(sig,SIG_IGN) == SIG_ERR ) {
       perror("nullfcn: error ignoring signal");
