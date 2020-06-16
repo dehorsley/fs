@@ -737,7 +737,7 @@ int skd_clr_ret(ip)
   status = msgrcv(msqid, (struct msgbuf *)&sched,
 		      sizeof(sched.messg), rtype, IPC_NOWAIT);
   
-  if (status < 0)
+  if (status < 0) {
     if(errno == EINTR)
       goto waitr;
     else if (errno == ENOMSG)
@@ -747,6 +747,7 @@ int skd_clr_ret(ip)
       perror("skd_clr_ret: receiving message");
       exit(EXIT_FAILURE);
     }
+  }
   // goto it, return ip array
   for (i=0;i<5;i++)
     ip[i]=sched.messg.ip[i];
