@@ -24,6 +24,8 @@
 #include <sys/types.h>
 #include <limits.h>
 #include <math.h>
+#include <ctype.h>
+
 #include "../include/params.h"
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */

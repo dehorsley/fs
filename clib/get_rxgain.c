@@ -20,10 +20,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <ctype.h>
 
 #include "../include/dpi.h"
 #include "../include/params.h"
-#include "../include/fs_types.h"
+#include "../include/clib/clib.h"
 
 int get_rxgain(file,rxgain)
      char file[];

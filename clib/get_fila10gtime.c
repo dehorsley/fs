@@ -23,8 +23,7 @@
 #include <stdio.h>
 
 #include "../include/params.h"
-#include "../include/req_ds.h"
-#include "../include/res_ds.h"
+#include "../include/clib/clib.h"
 
 #define BUFSIZE 2048
 

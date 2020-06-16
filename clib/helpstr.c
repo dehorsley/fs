@@ -27,6 +27,7 @@
 /*  any type of equipment. An m is for Mark III, and a v is for   */
 /*  VLBA.                                                         */
 
+#define _GNU_SOURCE
 #include <dirent.h>
 #include <limits.h>
 #include <stdio.h>
@@ -38,6 +39,7 @@
 #include "../include/params.h"
 
 #define MAX_STRING 256
+
 
 static char *help_dirs[] = {FS_ROOT "/st/help", FS_ROOT "/fs/help", NULL};
 

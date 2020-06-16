@@ -22,8 +22,7 @@
 #include <memory.h>
 
 #include "../include/params.h"
-#include "../include/req_ds.h"
-#include "../include/res_ds.h"
+#include "../include/clib/clib.h"
 
 int get_vtime(centisec,fm_tim,ip,to)
 int centisec[6];

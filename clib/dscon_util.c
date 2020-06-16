@@ -23,7 +23,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include "../include/params.h"
-#include "../include/ds_ds.h"
+#include "../include/clib/clib.h"
 
 #define NUL	0x00
 #define ACK	0x06

@@ -21,7 +21,7 @@
 
 #include <string.h>
 #include "../include/params.h"
-#include "../include/fs_types.h"
+#include "../include/clib/clib.h"
 
 int dbbc_2_vsi_clk(lclm,buff)
 struct dbbcvsi_clk_mon *lclm;

@@ -23,7 +23,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include "../include/params.h"
-#include "../include/dist_ds.h"
+#include "../include/clib/clib.h"
 
                                              /* parameter keywords */
 static char *key_att[ ]={ "0", "20" };

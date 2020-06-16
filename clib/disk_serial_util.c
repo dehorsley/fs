@@ -24,7 +24,8 @@
 #include <errno.h>
 
 #include "../include/params.h"
-#include "../include/fs_types.h"
+#include "../include/clib/clib.h"
+#include "../include/poclb/poclb.h"
 
 void disk_serial_mon(output,count,lcl)
 char *output;

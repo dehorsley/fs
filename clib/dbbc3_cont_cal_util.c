@@ -25,7 +25,7 @@
 #include <limits.h>
 #include <math.h>
 #include "../include/params.h"
-#include "../include/dbbc3_cont_cal_ds.h"
+#include "../include/clib/clib.h"
 
 static char *mode_key[ ]={"off","on"};
 

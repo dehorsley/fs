@@ -21,6 +21,8 @@
 
 #include <string.h>
 
+#include "../include/clib/clib.h"
+
 #define MAX_BUF 512
 
 int ib_req1(ip,device)

@@ -19,6 +19,9 @@
  */
 /* general fs parameter header */
 
+#ifndef FS_PARAMS_H
+#define FS_PARAMS_H
+
 #ifndef TRUE
 #define TRUE        1
 #define FALSE       0
@@ -209,3 +212,5 @@
 #define MAX_RDBE_IF   2
 
 #define MAX_LO     (MAX_RDBE*MAX_RDBE_IF)
+
+#endif

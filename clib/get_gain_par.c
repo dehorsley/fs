@@ -21,13 +21,13 @@
 #include <sys/types.h>
 #include <math.h>
 
-#include "../include/dpi.h"
 #include "../include/params.h"
 #include "../include/fs_types.h"
 #include "../include/fscom.h"         /* shared memory definition */
 #include "../include/shm_addr.h"      /* shared memory pointer */
 #include "../include/rtelb/rtelb.h"
 #include "../include/clib/clib.h"
+#include "../include/poclb/poclb.h"
 
 int get_gain_par(ifchain,center,fwhm,dpfu,gain,tcal)
      int ifchain;

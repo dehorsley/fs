@@ -5,6 +5,7 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 
+#include "../params.h"
 #include "../fs_types.h"
 /* clib/antcn_term.c */
 int antcn_term(int *out);

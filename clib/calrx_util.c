@@ -24,9 +24,8 @@
 #include <sys/types.h>
 #include <limits.h>
 #include <math.h>
-#include "../include/params.h"
+#include "../include/clib/clib.h"
 #include "../include/macro.h"
-#include "../include/calrx_ds.h"
 
 static char *type_key[ ]={ "fixed", "range" }; 
 

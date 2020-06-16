@@ -24,7 +24,8 @@
 
 #include "../include/params.h"
 #include "../rclco/rcl/rcl_def.h"
-#include "../include/fs_types.h"
+#include "../include/clib/clib.h"
+#include "../include/poclb/poclb.h"
 
 int get_s2time(dev,centisec,it,nanosec,ip,to)
 char dev[];

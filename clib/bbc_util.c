@@ -20,13 +20,14 @@
 /* vlba bbc buffer parsing utilities */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <limits.h>
 #include <math.h>
 #include "../include/params.h"
 #include "../include/macro.h"
-#include "../include/bbc_ds.h"
+#include "../include/clib/clib.h"
 
 static char *if_key[ ]={ "a", "b", "c", "d" }; /* if input source */
 /*static double bw_key[ ]={0.0625,0.125,0.25,0.5,1.0,2.0,4.0,8.0,16.0};*/

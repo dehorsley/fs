@@ -24,6 +24,7 @@
 #include <sys/types.h>
 #include <limits.h>
 #include <math.h>
+#include <stdlib.h>
 
 #include "../include/dpi.h"
 #include "../include/macro.h"

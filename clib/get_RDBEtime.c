@@ -25,7 +25,7 @@
 #define BUFSIZE 2048
 
 #include "../include/params.h"
-#include "../include/fs_types.h"
+#include "../include/clib/clib.h"
 
 int get_RDBEtime(centisec,fm_tim,ip,to,iRDBE,vdif_epoch)
 int centisec[6];
