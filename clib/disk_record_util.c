@@ -150,7 +150,7 @@ struct disk_record_mon *lcl;
    return;
 }
 
-int disk_record_2_m5(ptr,lcl)
+void disk_record_2_m5(ptr,lcl)
 char *ptr;
 struct disk_record_cmd *lcl;
 {

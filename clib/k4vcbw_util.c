@@ -142,7 +142,7 @@ struct k4vcbw_cmd *lcl;
 
 }
 
-int k4vcbw_req_q(ip,itask)
+void k4vcbw_req_q(ip,itask)
 int ip[5];
 int itask;
 {
@@ -170,7 +170,7 @@ int itask;
  ib_req7(ip,device,lenrd,"RD");
 
 }
-int k4vcbw_req_c(ip,lclc,itask)
+void k4vcbw_req_c(ip,lclc,itask)
 int ip[5];
 struct k4vcbw_cmd *lclc;
 int itask;
@@ -212,7 +212,7 @@ int itask;
 
 }
 
-int k4vcbw_res_q(lclc,ip,itask)
+void k4vcbw_res_q(lclc,ip,itask)
 struct k4vcbw_cmd *lclc;
 int ip[5];
 int itask;

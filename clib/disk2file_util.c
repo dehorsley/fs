@@ -182,7 +182,7 @@ struct disk2file_mon *lcl;
    return;
 }
 
-int disk2file_2_m5_scan_set(ptr,lcl)
+void disk2file_2_m5_scan_set(ptr,lcl)
 char *ptr;
 struct disk2file_cmd *lcl;
 {
@@ -204,7 +204,7 @@ struct disk2file_cmd *lcl;
 
   return;
 }
-int disk2file_2_m5(ptr,lcl)
+void disk2file_2_m5(ptr,lcl)
 char *ptr;
 struct disk2file_cmd *lcl;
 {

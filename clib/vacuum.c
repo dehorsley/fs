@@ -70,14 +70,14 @@ int *ierr, indx;
   skd_run("mcbcn",'w',ip);
   skd_par(ip);
 
-  if(ip[2]<0) return;
+  if(ip[2]<0) return -1;
 
   opn_res(&rbuffer,ip);
   get_res(&response, &rbuffer); mc73tape(&lcl, response.data);
   if (response.state == -1) {
     clr_res(&rbuffer);
     *ierr=-401;
-    return;
+    return -1;
   }
   clr_res(&rbuffer);
 

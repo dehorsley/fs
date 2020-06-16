@@ -85,7 +85,7 @@ struct k4rec_mon *lcl;
   return;
 }
 
-int k4rec_req_q(ip)
+void k4rec_req_q(ip)
 int ip[5];
 {
   ib_req7(ip,device,20,"SQN?");
@@ -95,49 +95,49 @@ int ip[5];
   ib_req8(ip,device,10,"STAT?");
 }
 
-int k4rec_req_eject(ip)
+void k4rec_req_eject(ip)
 int ip[5];
 {
   ib_req2(ip,device,"UNL");
 }
 
-int k4rec_req_ini(ip)
+void k4rec_req_ini(ip)
 int ip[5];
 {
   ib_req2(ip,device,"INI");
 }
 
-int k4rec_req_xsy(ip)
+void k4rec_req_xsy(ip)
 int ip[5];
 {
   ib_req2(ip,device,"XSY");
 }
 
-int k4rec_req_drum_on(ip)
+void k4rec_req_drum_on(ip)
 int ip[5];
 {
   ib_req2(ip,device,"DRM=ON");
 }
 
-int k4rec_req_drum_off(ip)
+void k4rec_req_drum_off(ip)
 int ip[5];
 {
   ib_req2(ip,device,"DRM=OFF");
 }
 
-int k4rec_req_synch_on(ip)
+void k4rec_req_synch_on(ip)
 int ip[5];
 {
   ib_req2(ip,device,"SYT=ON");
 }
 
-int k4rec_req_synch_off(ip)
+void k4rec_req_synch_off(ip)
 int ip[5];
 {
   ib_req2(ip,device,"SYT=OFF");
 }
 
-int k4rec_req_prl(ip,ptr)
+void k4rec_req_prl(ip,ptr)
 int ip[5];
 char *ptr;
 {
@@ -204,5 +204,6 @@ int ip[5];
   lcl->stat1=buffer[0];
   lcl->stat2=buffer[1];
    
+  return 0;
 }
 

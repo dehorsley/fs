@@ -128,7 +128,7 @@ struct k4pcalports_mon *lclm;
 }
 
 
-int k4pcalports_req_q(ip)
+void k4pcalports_req_q(ip)
 int ip[5];
 {
 
@@ -136,7 +136,7 @@ int ip[5];
  ib_req7(ip,device,20,"PCB?");
 
 }
-int k4pcalports_req_c(ip,lclc)
+void k4pcalports_req_c(ip,lclc)
 int ip[5];
 struct k4pcalports_cmd *lclc;
 {
@@ -174,7 +174,7 @@ int ip[5];
   ib_res_ascii(buffer,&max,ip);
   if(max < 0) {
     ip[2]=-1;
-    return;
+    return 0;
   }
 
   if(3!=(icount=sscanf(buffer,
@@ -183,14 +183,14 @@ int ip[5];
 		       lclm->phase+0,
 		       lclc->ports+0))) {
     ip[2]=-1;
-    return;
+    return 0;
   }
 
   max=sizeof(buffer);
   ib_res_ascii(buffer,&max,ip);
   if(max < 0) {
     ip[2]=-1;
-    return;
+    return 0;
   }
 
   if(3!=(icount=sscanf(buffer,
@@ -199,9 +199,10 @@ int ip[5];
 		       lclm->phase+1,
 		       lclc->ports+1))) {
     ip[2]=-1;
-    return;
+    return 0;
   }
 
+  return 0;
 }
 
 

@@ -217,7 +217,7 @@ struct rdbe_atten_mon *lclm;
   if(*count>0) *count++;
   return;
 }
-int rdbe_atten_2_rdbe(ptr,lcl)
+void rdbe_atten_2_rdbe(ptr,lcl)
 char *ptr;
 struct rdbe_atten_cmd *lcl;
 {

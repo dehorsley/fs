@@ -351,7 +351,7 @@ struct mk5b_mode_mon *lclm;
    return;
 }
 
-int mk5b_mode_2_m5(ptr,lclc,itask)
+void mk5b_mode_2_m5(ptr,lclc,itask)
 char *ptr;
 struct mk5b_mode_cmd *lclc;
 int itask;

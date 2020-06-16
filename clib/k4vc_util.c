@@ -179,7 +179,7 @@ struct k4vc_mon *lcl;
   return;
 }
 
-int k4vc_req_q(ip,itask)
+void k4vc_req_q(ip,itask)
 int ip[5];
 int itask;
 {
@@ -212,9 +212,10 @@ int itask;
 
  ib_req7(ip,device,lenlv,"LV");
 
+ return;
 }
 
-int k4vc_req_c(ip,lclc,ivc,itask)
+void k4vc_req_c(ip,lclc,ivc,itask)
 int ip[5];
 struct k4vc_cmd *lclc;
 int ivc,itask;
@@ -260,9 +261,10 @@ int ivc,itask;
     strcpy(buffer,"LSB");
   ib_req2(ip,device,buffer);
 
+  return;
 }
 
-int k4vc_res_q(lclc,lclm,ip,itask)
+void k4vc_res_q(lclc,lclm,ip,itask)
 struct k4vc_cmd *lclc;
 struct k4vc_mon *lclm;
 int ip[5];

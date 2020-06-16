@@ -145,7 +145,7 @@ struct in2net_mon *lcl;
    return;
 }
 
-int in2net_2_m5(ptr,lcl)
+void in2net_2_m5(ptr,lcl)
 char *ptr;
 struct in2net_cmd *lcl;
 {

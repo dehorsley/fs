@@ -22,7 +22,7 @@ int arg_key(char *ptr, char **key, int nkey, int *iptr, int dflt, int flag);
 int arg_key_flt(char *ptr, char **key, int nkey, int *iptr, int dflt, int flag);
 /* clib/bank_check_util.c */
 int rtime_decode(struct rtime_mon *rtime_mon, struct bank_set_mon *bank_set_mon, int ip[5]);
-int bank_set_check(int *done, int ip[5]);
+void bank_set_check(int *done, int ip[5]);
 int m5_2_rtime(char *ptr_in, struct rtime_mon *lclm, int ip[5]);
 int m5_2_bank_set(char *ptr_in, struct bank_set_mon *lclm, int ip[5]);
 int m5_2_vsn(char *ptr_in, struct vsn_mon *lclm, int ip[5]);
@@ -180,8 +180,8 @@ int dbbc_2_dbbc_vsix(struct dbbc_vsix_cmd *lclc, char *buff);
 int disk2file_dec(struct disk2file_cmd *lcl, int *count, char *ptr);
 void disk2file_enc(char *output, int *count, struct disk2file_cmd *lcl);
 void disk2file_mon(char *output, int *count, struct disk2file_mon *lcl);
-int disk2file_2_m5_scan_set(char *ptr, struct disk2file_cmd *lcl);
-int disk2file_2_m5(char *ptr, struct disk2file_cmd *lcl);
+void disk2file_2_m5_scan_set(char *ptr, struct disk2file_cmd *lcl);
+void disk2file_2_m5(char *ptr, struct disk2file_cmd *lcl);
 int m5_2_disk2file(char *ptr_in, struct disk2file_cmd *lclc, struct disk2file_mon *lclm, int ip[5]);
 int m5_scan_set_2_disk2file(char *ptr_in, struct disk2file_cmd *lclc, struct disk2file_mon *lclm, int ip[5]);
 /* clib/disk_pos_util.c */
@@ -191,7 +191,7 @@ int m5_2_disk_pos(char *ptr_in, struct disk_pos_mon *lclm, int ip[5]);
 int disk_record_dec(struct disk_record_cmd *lcl, int *count, char *ptr);
 void disk_record_enc(char *output, int *count, struct disk_record_cmd *lclc, struct disk_record_mon *lclm);
 void disk_record_mon(char *output, int *count, struct disk_record_mon *lcl);
-int disk_record_2_m5(char *ptr, struct disk_record_cmd *lcl);
+void disk_record_2_m5(char *ptr, struct disk_record_cmd *lcl);
 int m5_2_disk_record(char *ptr_in, struct disk_record_cmd *lclc, struct disk_record_mon *lclm, int ip[5]);
 /* clib/disk_serial_util.c */
 void disk_serial_mon(char *output, int *count, struct disk_serial_mon *lcl);
@@ -234,9 +234,9 @@ void et_v(int ip[5], int indxtp);
 int fila10g_mode_dec(struct fila10g_mode_cmd *lcl, int *count, char *ptr);
 void fila10g_mode_enc(char *output, int *count, struct fila10g_mode_cmd *lclc);
 void fila10g_mode_mon(char *output, int *count, struct fila10g_mode_mon *lclm);
-int vsi_bitmask_2_fila10g(char *ptr, struct fila10g_mode_cmd *lclc);
-int vsi_samplerate_2_fila10g(char *ptr, struct fila10g_mode_cmd *lclc);
-int vdif_frame_2_fila10g(char *ptr, struct fila10g_mode_cmd *lclc);
+void vsi_bitmask_2_fila10g(char *ptr, struct fila10g_mode_cmd *lclc);
+void vsi_samplerate_2_fila10g(char *ptr, struct fila10g_mode_cmd *lclc);
+void vdif_frame_2_fila10g(char *ptr, struct fila10g_mode_cmd *lclc);
 int fila10g_2_vsi_bitmask(char *ptr, struct fila10g_mode_cmd *lclc);
 int fila10g_2_vsi_samplerate(char *ptr, struct fila10g_mode_cmd *lclc, struct fila10g_mode_mon *lclm);
 /* clib/find_next_noncomment.c */
@@ -277,7 +277,7 @@ int get_5btime(int centisec[6], int fm_tim[6], int ip[5], int to, char *m5sync, 
 /* clib/get_fila10gtime.c */
 int get_fila10gtime(int centisec[6], int fm_tim[6], int ip[5], int to, int iDBBC);
 /* clib/get_gain_par.c */
-int get_gain_par(int ifchain, double center, float *fwhm, float *dpfu, float *gain, float *tcal);
+void get_gain_par(int ifchain, double center, float *fwhm, float *dpfu, float *gain, float *tcal);
 /* clib/get_k3time.c */
 void get_k3time(int centisec[2], int fm_tim[6], int ip[5]);
 /* clib/get_k4time.c */
@@ -334,7 +334,7 @@ int if_cmd(char *ibuf, char *nchar);
 int in2net_dec(struct in2net_cmd *lcl, int *count, char *ptr);
 void in2net_enc(char *output, int *count, struct in2net_cmd *lclc, struct in2net_mon *lclm);
 void in2net_mon(char *output, int *count, struct in2net_mon *lcl);
-int in2net_2_m5(char *ptr, struct in2net_cmd *lcl);
+void in2net_2_m5(char *ptr, struct in2net_cmd *lcl);
 int m5_2_in2net(char *ptr_in, struct in2net_cmd *lclc, struct in2net_mon *lclm, int ip[5]);
 /* clib/incom_ini.c */
 void incom_ini(int *iclbox, int *iclopr);
@@ -344,9 +344,9 @@ void int2str(char *output, int ivalue, int width, int zorb);
 int k3fm_dec(struct k3fm_cmd *lcl, int *new_aux, int *count, char *ptr);
 void k3fm_enc(char *output, int *count, struct k3fm_cmd *lcl);
 void k3fm_mon(char *output, int *count, struct k3fm_mon *lcl);
-int k3fm_req_q(int ip[5]);
-int k3fm_req_c(int ip[5], struct k3fm_cmd *lclc, int new_aux);
-int k3fm_res_q(struct k3fm_cmd *lclc, struct k3fm_mon *lclm, int ip[5]);
+void k3fm_req_q(int ip[5]);
+void k3fm_req_c(int ip[5], struct k3fm_cmd *lclc, int new_aux);
+void k3fm_res_q(struct k3fm_cmd *lclc, struct k3fm_mon *lclm, int ip[5]);
 /* clib/k4ib_util.c */
 int k4ib_dec(struct cmd_ds *command, int ip[5], int *ireq);
 /* clib/k4label_util.c */
@@ -356,71 +356,71 @@ void k4label_enc(char *output, int *count, struct k4label_cmd *lcl);
 int k4pcalports_dec(struct k4pcalports_cmd *lcl, int *count, char *ptr);
 void k4pcalports_enc(char *output, int *count, struct k4pcalports_cmd *lcl);
 void k4pcalports_mon(char *output, int *count, struct k4pcalports_cmd *lclc, struct k4pcalports_mon *lclm);
-int k4pcalports_req_q(int ip[5]);
-int k4pcalports_req_c(int ip[5], struct k4pcalports_cmd *lclc);
+void k4pcalports_req_q(int ip[5]);
+void k4pcalports_req_c(int ip[5], struct k4pcalports_cmd *lclc);
 int k4pcalports_res_q(struct k4pcalports_cmd *lclc, struct k4pcalports_mon *lclm, int ip[5]);
 /* clib/k4rec_mode_util.c */
 int k4rec_mode_dec(struct k4rec_mode_cmd *lclc, int *count, char *ptr);
 void k4rec_mode_enc(char *output, int *count, struct k4rec_mode_cmd *lclc);
 void k4rec_mode_mon(char *output, int *count, struct k4rec_mode_mon *lclm, struct k4rec_mode_cmd *lclc);
-int k4rec_mode_req_q(int ip[5]);
-int k4rec_mode_req_c(int ip[5], struct k4rec_mode_cmd *lclc);
+void k4rec_mode_req_q(int ip[5]);
+void k4rec_mode_req_c(int ip[5], struct k4rec_mode_cmd *lclc);
 int k4rec_mode_res_q(struct k4rec_mode_cmd *lclc, struct k4rec_mode_mon *lclm, int ip[5]);
 /* clib/k4recpatch_util.c */
 int k4recpatch_dec(struct k4recpatch_cmd *lcl, int *count, char *ptr);
 void k4recpatch_enc(char *output, int *count, struct k4recpatch_cmd *lcl);
 /* clib/k4rec_util.c */
 void k4rec_mon(char *output, int *count, struct k4rec_mon *lcl);
-int k4rec_req_q(int ip[5]);
-int k4rec_req_eject(int ip[5]);
-int k4rec_req_ini(int ip[5]);
-int k4rec_req_xsy(int ip[5]);
-int k4rec_req_drum_on(int ip[5]);
-int k4rec_req_drum_off(int ip[5]);
-int k4rec_req_synch_on(int ip[5]);
-int k4rec_req_synch_off(int ip[5]);
-int k4rec_req_prl(int ip[5], char *ptr);
+void k4rec_req_q(int ip[5]);
+void k4rec_req_eject(int ip[5]);
+void k4rec_req_ini(int ip[5]);
+void k4rec_req_xsy(int ip[5]);
+void k4rec_req_drum_on(int ip[5]);
+void k4rec_req_drum_off(int ip[5]);
+void k4rec_req_synch_on(int ip[5]);
+void k4rec_req_synch_off(int ip[5]);
+void k4rec_req_prl(int ip[5], char *ptr);
 int k4rec_res_q(struct k4rec_mon *lcl, int ip[5]);
 /* clib/k4st_util.c */
 int k4st_dec(struct k4st_cmd *lcl, int *count, char *ptr);
 void k4st_enc(char *output, int *count, struct k4st_cmd *lcl);
-int k4st_req_q(int ip[5]);
-int k4st_reqs_q(int ip[5]);
-int k4st_req_c(int ip[5], struct k4st_cmd *lclc, int tcoff, int sqn);
+void k4st_req_q(int ip[5]);
+void k4st_reqs_q(int ip[5]);
+void k4st_req_c(int ip[5], struct k4st_cmd *lclc, int tcoff, int sqn);
 int k4st_res_q(struct k4st_cmd *lclc, int ip[5]);
-int k4st_ress_q(int ip[5], int *sqn);
+void k4st_ress_q(int ip[5], int *sqn);
 /* clib/k4tape_util.c */
 int k4tape_dec(int *reset, int *count, char *ptr);
 void k4tape_mon(char *output, int *count, struct k4tape_mon *lcl);
-int k4tape_req_q(int ip[5]);
-int k4tape_req_c(int ip[5], int *reset);
+void k4tape_req_q(int ip[5]);
+void k4tape_req_c(int ip[5], int *reset);
 int k4tape_res_q(struct k4tape_mon *lcl, int ip[5]);
 /* clib/k4vcbw_util.c */
 int k4vcbw_dec(struct k4vcbw_cmd *lcl, int *count, char *ptr, int itask);
 void k4vcbw_enc(char *output, int *count, struct k4vcbw_cmd *lcl, int itask);
-int k4vcbw_req_q(int ip[5], int itask);
-int k4vcbw_req_c(int ip[5], struct k4vcbw_cmd *lclc, int itask);
-int k4vcbw_res_q(struct k4vcbw_cmd *lclc, int ip[5], int itask);
+void k4vcbw_req_q(int ip[5], int itask);
+void k4vcbw_req_c(int ip[5], struct k4vcbw_cmd *lclc, int itask);
+void k4vcbw_res_q(struct k4vcbw_cmd *lclc, int ip[5], int itask);
 /* clib/k4vcif_util.c */
 int k4vcif_dec(struct k4vcif_cmd *lcl, int *count, char *ptr);
 void k4vcif_enc(char *output, int *count, struct k4vcif_cmd *lcl);
-int k4vcif_req_q(int ip[5]);
-int k4vcif_req_c(int ip[5], struct k4vcif_cmd *lclc);
-int k4vcif_res_q(struct k4vcif_cmd *lclc, int ip[5]);
+void k4vcif_req_q(int ip[5]);
+void k4vcif_req_c(int ip[5], struct k4vcif_cmd *lclc);
+void k4vcif_res_q(struct k4vcif_cmd *lclc, int ip[5]);
 /* clib/k4vclo_util.c */
 int k4vclo_dec(struct k4vclo_cmd *lcl, int *ivc, int *count, char *ptr, int itask);
 void k4vclo_enc(char *output, int *count, struct k4vclo_cmd *lcl, int itask);
 void k4vclo_mon(char *output, int *count, struct k4vclo_mon *lcl, int itask);
-int k4vclo_req_q(int ip[5], int itask);
-int k4vclo_req_c(int ip[5], struct k4vclo_cmd *lclc, int ivc, int itask);
-int k4vclo_res_q(struct k4vclo_cmd *lclc, struct k4vclo_mon *lclm, int ip[5], int itask);
+void k4vclo_req_q(int ip[5], int itask);
+void k4vclo_req_c(int ip[5], struct k4vclo_cmd *lclc, int ivc, int itask);
+void k4vclo_res_q(struct k4vclo_cmd *lclc, struct k4vclo_mon *lclm, int ip[5], int itask);
 /* clib/k4vc_util.c */
 int k4vc_dec(struct k4vc_cmd *lcl, int *ivc, int *count, char *ptr, int itask);
 void k4vc_enc(char *output, int *count, struct k4vc_cmd *lcl, int itask);
 void k4vc_mon(char *output, int *count, struct k4vc_mon *lcl, int itask);
-int k4vc_req_q(int ip[5], int itask);
-int k4vc_req_c(int ip[5], struct k4vc_cmd *lclc, int ivc, int itask);
-int k4vc_res_q(struct k4vc_cmd *lclc, struct k4vc_mon *lclm, int ip[5], int itask);
+void k4vc_req_q(int ip[5], int itask);
+void k4vc_req_c(int ip[5], struct k4vc_cmd *lclc, int ivc, int itask);
+void k4vc_res_q(struct k4vc_cmd *lclc, struct k4vc_mon *lclm, int ip[5], int itask);
 /* clib/lba_cor_util.c */
 int lba_cor_dec(struct ifp *lcl, int *count, char *ptr);
 void lba_cor_enc(char *output, int *count, struct ifp *lcl);
@@ -432,7 +432,7 @@ void lbaifpd(int itpis[2*2]);
 /* clib/lba_ifp_util.c */
 int lba_ifp_dec(struct ifp *lcl, int *count, char *ptr);
 void lba_ifp_enc(char *output, int *count, struct ifp *lcl);
-int lba_tpi_from_level(unsigned short level);
+int lba_tpi_from_level(int level);
 void lba_ifp_mon(char *output, int *count, struct ifp *lcl);
 int lba_ifp_setup(struct ifp *lcl, int n_ifp);
 int reset_err_flags(int n_ifp);
@@ -488,7 +488,7 @@ void mk5bbcd(int itpis[16*2]);
 int mk5b_mode_dec(struct mk5b_mode_cmd *lcl, int *count, char *ptr, int itask);
 void mk5b_mode_enc(char *output, int *count, struct mk5b_mode_cmd *lclc, struct mk5b_mode_mon *lclm, int itask);
 void mk5b_mode_mon(char *output, int *count, struct mk5b_mode_mon *lclm);
-int mk5b_mode_2_m5(char *ptr, struct mk5b_mode_cmd *lclc, int itask);
+void mk5b_mode_2_m5(char *ptr, struct mk5b_mode_cmd *lclc, int itask);
 int m5_2_mk5b_mode(char *ptr_in, struct mk5b_mode_cmd *lclc, struct mk5b_mode_mon *lclm, int itask, int ip[5]);
 /* clib/mk5dbbcd.c */
 void mk5dbbcd(int itpis[16*2]);
@@ -694,7 +694,7 @@ int rdbe_2_tsysx(char *buf, int *ifc, int ip[5], int on[], int off[], char *who)
 int rdbe_atten_dec(struct rdbe_atten_cmd *lcl, int *count, char *ptr);
 void rdbe_atten_enc(char *output, int *count, struct rdbe_atten_cmd *lclc);
 void rdbe_atten_mon(char *output, int *count, struct rdbe_atten_mon *lclm);
-int rdbe_atten_2_rdbe(char *ptr, struct rdbe_atten_cmd *lcl);
+void rdbe_atten_2_rdbe(char *ptr, struct rdbe_atten_cmd *lcl);
 int rdbe_2_rdbe_atten(char *ptr_in, struct rdbe_atten_mon *lclm, int ip[5]);
 /* clib/rdbe_dot_util.c */
 int rdbe_2_dot(char *ptr_in, struct rdbe_dot_mon *lclm, int ip[5]);
@@ -773,7 +773,7 @@ int sem_rel(key_t key);
 /* clib/set_k3aux.c */
 void set_k3aux(char lauxfm[12], int ip[5]);
 /* clib/setMK4FMrec.c */
-int setMK4FMrec(int val, int ip[5]);
+void setMK4FMrec(int val, int ip[5]);
 /* clib/setup_ids.c */
 void setup_ids(void);
 /* clib/set_vaux.c */

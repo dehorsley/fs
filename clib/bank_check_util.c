@@ -87,7 +87,7 @@ error:
       return -1;
 
 }
-int bank_set_check(done,ip)
+void bank_set_check(done,ip)
 int *done;
 int ip[5];
 {

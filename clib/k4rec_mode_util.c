@@ -213,7 +213,7 @@ struct k4rec_mode_cmd *lclc;
   return;
 }
 
-int k4rec_mode_req_q(ip)
+void k4rec_mode_req_q(ip)
 int ip[5];
 {
  ib_req7(ip,device,16,"SPM?");
@@ -222,7 +222,7 @@ int ip[5];
  ib_req7(ip,device,16,"DTS?");
 }
 
-int k4rec_mode_req_c(ip,lclc)
+void k4rec_mode_req_c(ip,lclc)
 int ip[5];
 struct k4rec_mode_cmd *lclc;
 {

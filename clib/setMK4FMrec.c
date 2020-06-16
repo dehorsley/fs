@@ -21,7 +21,7 @@
 
 #include "../include/clib/clib.h"
 
-int setMK4FMrec(val,ip)
+void setMK4FMrec(val,ip)
 int val;
 int ip[5];
 {

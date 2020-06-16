@@ -205,7 +205,7 @@ struct fila10g_mode_mon *lclm;
    return;
 }
 
-int vsi_bitmask_2_fila10g(ptr,lclc)
+void vsi_bitmask_2_fila10g(ptr,lclc)
 char *ptr;
 struct fila10g_mode_cmd *lclc;
 {
@@ -218,7 +218,7 @@ struct fila10g_mode_cmd *lclc;
 
   return;
 }
-int vsi_samplerate_2_fila10g(ptr,lclc)
+void vsi_samplerate_2_fila10g(ptr,lclc)
 char *ptr;
 struct fila10g_mode_cmd *lclc;
 {
@@ -227,7 +227,7 @@ struct fila10g_mode_cmd *lclc;
 
   return;
 }
-int vdif_frame_2_fila10g(ptr,lclc)
+void vdif_frame_2_fila10g(ptr,lclc)
 char *ptr;
 struct fila10g_mode_cmd *lclc;
 {

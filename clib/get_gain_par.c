@@ -29,7 +29,7 @@
 #include "../include/clib/clib.h"
 #include "../include/poclb/poclb.h"
 
-int get_gain_par(ifchain,center,fwhm,dpfu,gain,tcal)
+void get_gain_par(ifchain,center,fwhm,dpfu,gain,tcal)
      int ifchain;
      double center;
      float *fwhm, *tcal, *dpfu, *gain;

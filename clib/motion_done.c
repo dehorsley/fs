@@ -58,7 +58,7 @@ int indx;
       end_req(ip,&buffer);                  /* send buffer and schedule */
       skd_run("mcbcn",'w',ip);
       skd_par(ip);
-      if(ip[2] <0) return;
+      if(ip[2] <0) return TRUE;
 
       opn_res(&buffer_out,ip);              /* decode response */
       get_res(&response, &buffer_out);
@@ -96,7 +96,7 @@ int indx;
 	end_req(ip,&buffer);                  /* send buffer and schedule */
 	skd_run("mcbcn",'w',ip);
 	skd_par(ip);
-	if(ip[2] <0) return;
+	if(ip[2] <0) return TRUE;
 
 	opn_res(&buffer_out,ip);              /* decode response */
 	get_res(&response, &buffer_out);

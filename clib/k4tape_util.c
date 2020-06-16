@@ -110,7 +110,7 @@ struct k4tape_mon *lcl;
   return;
 }
 
-int k4tape_req_q(ip)
+void k4tape_req_q(ip)
 int ip[5];
 {
   if(shm_addr->k4tape_sqn[0]==0)
@@ -122,7 +122,7 @@ int ip[5];
   ib_req8(ip,device,10,"STAT?");
 }
 
-int k4tape_req_c(ip,reset)
+void k4tape_req_c(ip,reset)
 int ip[5];
 int *reset;
 {

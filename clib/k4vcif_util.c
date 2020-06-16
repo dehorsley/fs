@@ -75,13 +75,13 @@ struct k4vcif_cmd *lcl;
   return;
 }
 
-int k4vcif_req_q(ip)
+void k4vcif_req_q(ip)
 int ip[5];
 {
  ib_req7(ip,device,13*16+2,"RD");
 
 }
-int k4vcif_req_c(ip,lclc)
+void k4vcif_req_c(ip,lclc)
 int ip[5];
 struct k4vcif_cmd *lclc;
 {
@@ -93,7 +93,7 @@ struct k4vcif_cmd *lclc;
 
 }
 
-int k4vcif_res_q(lclc,ip)
+void k4vcif_res_q(lclc,ip)
 struct k4vcif_cmd *lclc;
 int ip[5];
 {
