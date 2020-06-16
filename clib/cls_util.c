@@ -25,10 +25,12 @@
 #include <sys/types.h>
 #include <sys/ipc.h>	/* interprocess communications (IPC) header file */
 #include <sys/msg.h>	/* message IPC header file */
+#include <unistd.h>
 
 #include "../include/params.h"
 #include "../include/fs_types.h"
 #include "../include/fscom.h"
+#include "../include/clib/clib.h"
 
 extern struct fscom *shm_addr;
 

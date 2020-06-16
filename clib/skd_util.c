@@ -30,6 +30,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include "../include/params.h"
+#include "../include/clib/clib.h"
+#include "../include/rtelb/rtelb.h"
+
 #define  MAX_BUF       256
 
 #define FS_SKD_WAIT (1 << 30)
@@ -253,7 +257,7 @@ if(nsem!=NULL && nsem[0]!=0)
   nsem_put(nsem);
 
 if(w != 'w')
-  return;
+  return 0;
 
  if(to !=0) {
    if(signal(SIGALRM,nullfcn) == SIG_ERR){
