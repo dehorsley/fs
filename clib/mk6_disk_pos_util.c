@@ -86,7 +86,7 @@ int m5_2_mk6_disk_pos(ptr_in,lclm,ip,who) /* return values:
   if(ptr!=NULL) {
     ptr=new_str=strdup(ptr+1);
     if(ptr==NULL) {
-      logit(NULL,errno,"un",who);
+      logit(NULL,errno,who);
       ierr=-902;
       goto error;
     }
