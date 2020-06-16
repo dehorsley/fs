@@ -35,7 +35,7 @@ char device[2];
   buffer[0]=1;
   memcpy(buffer+1,device,2);
 
-  cls_snd(ip+0,buffer,4);
+  cls_snd(ip + 0, buffer, 4, 0, 0);
   ip[1]++;
 }
 
@@ -54,7 +54,7 @@ char ptr[];
   nch=nch>MAX_BUF-2? MAX_BUF-2:nch;
   memcpy(buffer+2,ptr,nch);
 
-  cls_snd(ip+0,buffer,4+nch);
+  cls_snd(ip + 0, buffer, 4 + nch, 0, 0);
   ip[1]++;
 }
 
@@ -68,7 +68,7 @@ char device[2];
   buffer[0]=3;
   memcpy(buffer+1,device,2);
 
-  cls_snd(ip+0,buffer,4);
+  cls_snd(ip + 0, buffer, 4, 0, 0);
   ip[1]++;
 }
 
@@ -86,7 +86,7 @@ int n;
   memcpy(buffer+1,device,2);
   memcpy(buffer+2,ptr,n);
 
-  cls_snd(ip+0,buffer,4+n);
+  cls_snd(ip + 0, buffer, 4 + n, 0, 0);
   ip[1]++;
 }
 
@@ -102,7 +102,7 @@ int ilen;
   memcpy(buffer+1,device,2);
   buffer[2]=ilen;
 
-  cls_snd(ip+0,buffer,6);
+  cls_snd(ip + 0, buffer, 6, 0, 0);
   ip[1]++;
 }
 
@@ -118,7 +118,7 @@ int ilen;
   memcpy(buffer+1,device,2);
   buffer[2]=ilen;
 
-  cls_snd(ip+0,buffer,6);
+  cls_snd(ip + 0, buffer, 6, 0, 0);
   ip[1]++;
 }
 
@@ -139,7 +139,7 @@ char ptr[];
   nch=nch>MAX_BUF-3? MAX_BUF-3:nch;
   memcpy(buffer+3,ptr,nch);
 
-  cls_snd(ip+0,buffer,6+nch);
+  cls_snd(ip + 0, buffer, 6 + nch, 0, 0);
   ip[1]++;
 }
 
@@ -160,7 +160,7 @@ char ptr[];
   nch=nch>MAX_BUF-3? MAX_BUF-3:nch;
   memcpy(buffer+3,ptr,nch);
 
-  cls_snd(ip+0,buffer,6+nch);
+  cls_snd(ip + 0, buffer, 6 + nch, 0, 0);
   ip[1]++;
 }
 
@@ -174,7 +174,7 @@ char device[2];
   buffer[0]=9;
   memcpy(buffer+1,device,2);
 
-  cls_snd(ip+0,buffer,4);
+  cls_snd(ip + 0, buffer, 4, 0, 0);
   ip[1]++;
 }
 int ib_req10(ip,device)
@@ -187,7 +187,7 @@ char device[2];
   buffer[0]=10;
   memcpy(buffer+1,device,2);
 
-  cls_snd(ip+0,buffer,4);
+  cls_snd(ip + 0, buffer, 4, 0, 0);
   ip[1]++;
 }
 
@@ -208,7 +208,7 @@ char ptr[];
   nch=nch>MAX_BUF-3? MAX_BUF-3:nch;
   memcpy(buffer+3,ptr,nch);
 
-  cls_snd(ip+0,buffer,6+nch);
+  cls_snd(ip + 0, buffer, 6 + nch, 0, 0);
   ip[1]++;
 }
 int ib_req12(ip,device)
@@ -221,7 +221,7 @@ char device[2];
   buffer[0]=12;
   memcpy(buffer+1,device,2);
 
-  cls_snd(ip+0,buffer,4);
+  cls_snd(ip + 0, buffer, 4, 0, 0);
   ip[1]++;
 }
 
