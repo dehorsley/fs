@@ -39,9 +39,13 @@
 #include <nng/protocol/pubsub0/pub.h>
 #include <nng/protocol/reqrep0/rep.h>
 #include <nng/protocol/reqrep0/req.h>
+#include <nng/supplemental/http/http.h>
 #include <nng/supplemental/util/platform.h>
 
 #include <jansson.h>
+
+// TODO: make this more sensible
+#define WEBROOT "/usr2/fs/fsserver/web/public/"
 
 #include "../include/params.h"
 
@@ -1017,6 +1021,39 @@ bool server_is_running(server_t *s) {
 	return r;
 }
 
+int server_setup_web(char *weburl) {
+	int rv;
+	nng_http_server *server;
+	nng_http_handler *handler;
+	nng_url *url;
+
+	if ((rv = nng_url_parse(&url, weburl)) != 0) {
+		fatal("nng_url_parse", nng_strerror(rv));
+	}
+
+	if ((rv = nng_http_server_hold(&server, url)) != 0) {
+		fatal("nng_http_server_hold", nng_strerror(rv));
+	}
+
+	rv = nng_http_handler_alloc_directory(&handler, "/", WEBROOT);
+	if (rv != 0) {
+		fatal("nng_http_handler_alloc", nng_strerror(rv));
+	}
+	if ((rv = (nng_http_handler_set_tree(handler)) != 0)) {
+		fatal("nng_http_handler_add_handler", nng_strerror(rv));
+	}
+	if ((rv = nng_http_server_add_handler(server, handler)) != 0) {
+		fatal("nng_http_handler_add_handler", nng_strerror(rv));
+	}
+
+	if ((rv = nng_http_server_start(server)) != 0) {
+		fatal("nng_http_server_start", nng_strerror(rv));
+	}
+
+	nng_url_free(url);
+	return 0;
+}
+
 int server_start(server_t *s) {
 	int rv;
 	assert(s != NULL);
@@ -1024,6 +1061,11 @@ int server_start(server_t *s) {
 	assert(s->clients_cmd_url != NULL);
 
 	nng_mtx_lock(s->mtx);
+
+	rv = server_setup_web(FS_SERVER_URL_BASE);
+	if (rv != 0) {
+		fatal("server_setup_web", nng_strerror(rv));
+	}
 
 	rv = nng_listen(s->server_cmd_sock, s->server_cmd_url, NULL, 0);
 	if (rv != 0) {
