@@ -87,7 +87,7 @@ int nsem_test();
 void logit();
 
 /* antcn main program starts here */
-main()
+int main()
 {
   int ierr, nrec, nrecr;
   int dum = 0;

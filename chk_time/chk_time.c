@@ -26,7 +26,7 @@
 /*
  * Compare systems times to system time, this might detect steps in NTP
  */
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 
   struct tms buffer;

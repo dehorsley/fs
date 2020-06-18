@@ -23,7 +23,7 @@
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
 
-main()
+int main()
 {
   int i;
 

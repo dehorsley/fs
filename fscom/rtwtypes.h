@@ -178,9 +178,6 @@ typedef char_T byte_T;
  * MATLAB for code generation assumes the code is compiled on a target using a 2's compliment representation
  * for signed integer values.
  */
-#if ((SCHAR_MIN + 1) != -SCHAR_MAX)
-#error "This code must be compiled using a 2's complement representation for signed integer values"
-#endif
 
 /*
  * Maximum length of a MATLAB identifier (function/variable)

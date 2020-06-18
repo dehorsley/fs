@@ -44,7 +44,7 @@
 
 extern struct fscom *shm_addr;
 
-main()
+int main()
 {
   int ip[5],ipr[5];
   int ipa[5] ={ 5, 0, 0, 0, 0};

@@ -44,7 +44,7 @@ struct  cls_buf {
 
 static int msqid;
 
-main()
+int main()
 {
 key_t key;
 int    class;

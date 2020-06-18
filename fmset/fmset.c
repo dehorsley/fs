@@ -81,7 +81,7 @@ int nanosec=-1;
 static int ipr[5] = { 0, 0, 0, 0, 0};
 int dbbc_sync=0;
 
-main()  
+int main()  
 {
 /* local variable declarations */
 time_t unixtime; /* local computer system time */

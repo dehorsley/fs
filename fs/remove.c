@@ -22,7 +22,7 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 
-main()
+int main()
 {
    struct shmid_ds *buf, str;
 

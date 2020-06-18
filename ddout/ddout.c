@@ -39,7 +39,7 @@
 
 extern struct fscom *shm_addr;
 
-main()
+int main()
 {
     int i;
     int cls_rcv(),fserr_rcv();

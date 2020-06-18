@@ -19,7 +19,7 @@
  */
 #include <stdio.h>
 
-main()
+int main()
 {
 int class, rtn1, rtn2, nchars,i;
 char buffer[100];

@@ -69,7 +69,7 @@ struct error_struct *error_base=NULL;
 
 FILE *dcbfs;
 
-main(){
+int main(){
   int fserr_rcv();
   int class, ip[5];
   int rtn1, rtn2;

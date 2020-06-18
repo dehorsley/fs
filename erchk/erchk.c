@@ -125,7 +125,7 @@ int read_skd() {
   }
 }
 
-main()
+int main()
 {
   int i,irow,icol,fd;
   char chk_message[MAX_LEN];

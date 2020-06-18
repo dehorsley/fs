@@ -23,11 +23,9 @@
 #include <string.h>
 #include <sys/types.h>
 
-#include "../include/params.h"
-#include "../include/fs_types.h"
+#include "../include/clib/clib.h"
 #include "../include/fscom.h"
 #include "../include/shm_addr.h"
-#include "../include/k4tape_ds.h"
 
 #define MAX_OUT 256
 

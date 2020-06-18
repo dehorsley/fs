@@ -38,7 +38,7 @@ void setupdirs(void) {
 #endif
 }
 
-main()
+int main()
 {
     int size, nsems, shm_id, sem_id, cls_id, skd_id, brk_id;
     key_t key;

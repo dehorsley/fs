@@ -34,7 +34,7 @@ int portread_();
 /*
  * This will test the Field System ports.
  */
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
   /* Passed arguments */
   int ttynum;       /* write to com port: 1-2 or Vikom: 16-23 */

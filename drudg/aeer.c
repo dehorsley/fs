@@ -74,7 +74,6 @@ struct code codes[] = {
 typedef int Boolean;
 typedef unsigned char byte;
 #define DOTS 2
-#define NULL 0L
 #define FALSE 0
 #define PRINTERS 4
   

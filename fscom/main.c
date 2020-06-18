@@ -20,7 +20,7 @@
 #include <math.h>
 #include <stdio.h>
 
-main()
+int main()
 {
   double x[8],y[8];
   int i;
