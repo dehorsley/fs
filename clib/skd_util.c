@@ -10,6 +10,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 
 #define  MAX_BUF       256
 
@@ -79,6 +80,68 @@ fprintf( stdout,"skd_get: id %d\n",msqid);
 return( 0);
 }
 
+void dumpqueue() {
+	time_t timer;
+	char buffer[26];
+	struct tm *tm_info;
+	struct skd_buf sched;
+    FILE * f = fopen("/tmp/skd_dump.json","w");
+    if(f == NULL) {
+        perror("opening skd_dump.json");
+    }
+
+	timer   = time(NULL);
+	tm_info = localtime(&timer);
+
+	strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
+
+	if (fprintf(f, "{\"time\": \"%s\",\n \"data\": [", buffer) < 0) {
+		perror("fpritnf");
+		exit(1);
+	}
+
+    int first = 1;
+	for (;;) {
+		if (msgrcv(msqid, (struct msgbuf *)&sched, sizeof(sched.messg), -LONG_MAX,
+		           IPC_NOWAIT | MSG_NOERROR) < 0) {
+			if (errno == EINTR)
+				continue;
+			else if (errno == ENOMSG) {
+                break;
+            } else {
+				perror("skd_ini: error cleaning skd queue\n");
+				exit(-1);
+			}
+		}
+        if (!first) {
+            fprintf(f, ",");
+        } else {
+            first = 0;
+        }
+        fprintf(f, "\n");
+
+        fprintf(f, "{\n");
+        fprintf(f, "\"mtype\": %ld,\n", sched.mtype);
+
+        fprintf(f, "\"\"ip\":\n");
+        for (size_t i = 0; i < sizeof(sched.messg.ip)/sizeof(sched.messg.ip[0]); i++) {
+            if (i > 0) {
+                fprintf(f, ",");
+            }
+            fprintf(f, "%ld", sched.messg.ip[i]);
+        }
+        fprintf(f, "],\n");
+        fprintf(f, "\"rtype\": %ld,\n", sched.messg.rtype);
+        fprintf(f, "\"dad\": %d,\n", sched.messg.dad);
+        fprintf(f, "\"run_index\": %d,\n", sched.messg.run_index);
+        fprintf(f, "\"timed_out\": %d,\n", sched.messg.timed_out);
+        fprintf(f, "\"arg\": \"%s\"\n", sched.messg.arg);
+        fprintf(f, "}\n");
+	}
+    fprintf(f, "]}\n");
+    fclose(f);
+}
+
 void skd_ini( key)
 key_t key;
 {
@@ -91,6 +154,9 @@ if ( msqid == -1 ) {
     perror("skd_ini: translating key");
     exit( -1);
 }
+
+dumpqueue();
+return;
 
 waitr:
 status = msgrcv( msqid, (struct msgbuf *) &sched, sizeof( sched.messg),
