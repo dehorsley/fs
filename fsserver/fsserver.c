@@ -71,6 +71,8 @@ int cli_main(int argc, char *argv[]) {
 		fatal("unable to open open a socket", nng_strerror(rv));
 	}
 
+
+    printf("dialing " FS_SERVER_URL_BASE "/cmd\n");
 	if ((rv = nng_dial(server_cmd_sock, FS_SERVER_URL_BASE "/cmd", NULL, 0)) != 0) {
 		fatal("unable to connect to server", nng_strerror(rv));
 	}
@@ -87,6 +89,8 @@ int cli_main(int argc, char *argv[]) {
 		json_array_append_new(json_args, json_string(argv[i]));
 	}
 	json_object_set_new(json, "params", json_args);
+
+	json_dumpf(json, stdout, JSON_INDENT(2));
 
 	size_t size = json_dumpb(json, NULL, 0, 0);
 	char *buf   = nng_alloc(size);

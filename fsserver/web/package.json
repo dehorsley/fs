@@ -18,6 +18,8 @@
   "dependencies": {
     "nanomsg-browser": "^0.2.0",
     "sirv-cli": "^0.4.4",
-    "svelte-grid": "^1.10.8"
+    "svelte-grid": "^1.10.8",
+    "xterm": "^4.7.0",
+    "xterm-addon-fit": "^0.4.0"
   }
 }

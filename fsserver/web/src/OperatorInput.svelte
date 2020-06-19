@@ -148,10 +148,10 @@ input {
                 msg.error = {message: "connection error"}
                 return 0;
             }
-            const fields = input.split(" ");
+            /* const fields = input.split(" "); */
             let request = {
-                method: fields[0],
-                params: fields.slice(1),
+                method: "fs",
+                params: ["snap", input],
                 id: 0,
             }
             const data = await req.send(JSON.stringify(request));
@@ -171,11 +171,6 @@ input {
 				<span>{line.input}</span>
                 {#if line.error !== null}
                     <div> error {line.error.code}: {line.error.message} </div>
-                {/if}
-                {#if line.result !== null}
-                <div>
-                    {line.result}
-                </div>
                 {/if}
 			</div>
 		{/each}

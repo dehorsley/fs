@@ -20,8 +20,25 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <nng/compat/nanomsg/nn.h>
+#include <errno.h>
+
 #include "msg.h"
+
+// Output little-endian encoded uint16 to buffer,
+// returns:
+//         - number of bytes written on success,
+//         - -1 on error and sets errno
+ssize_t uint16_marshal_le(uint16_t n, uint8_t *buf, size_t max) {
+    if (max < 2) {
+        errno = EOVERFLOW;     
+        return -1;
+    }
+
+    buf[0] = n >> 000;
+    buf[1] = n >> 010;
+
+    return 2;
+}
 
 // Output little-endian encoded uint64 to buffer,
 // returns:
@@ -73,6 +90,22 @@ ssize_t uint64_marshal_be(uint64_t n, uint8_t *buf, size_t max) {
 // returns:
 //         - number of bytes written on success,
 //         - -1 on error and sets errno
+ssize_t uint16_unmarshal_le(uint16_t *out,  uint8_t *buf, size_t max) {
+    if (max < 2) {
+        errno = EOVERFLOW;     
+        return -1;
+    }
+
+    *out = 0;
+    *out |= buf[0]<<000;
+    *out |= buf[1]<<010;
+    return 2;
+}
+
+// Read little-endian encoded uint64 to buffer,
+// returns:
+//         - number of bytes written on success,
+//         - -1 on error and sets errno
 ssize_t uint64_unmarshal_le(uint64_t *out,  uint8_t *buf, size_t max) {
     if (max < 8) {
         errno = EOVERFLOW;     
@@ -91,6 +124,7 @@ ssize_t uint64_unmarshal_le(uint64_t *out,  uint8_t *buf, size_t max) {
     *out |= (uint64_t)buf[7]<<070;
     return 8;
 }
+
 
 // Read big-endian encoded uint64 to buffer,
 // returns:
@@ -151,7 +185,7 @@ ssize_t msg_marshal(msg_t* m, uint8_t* buf, size_t max) {
         return nbytes;
     }
 
-    n = uint64_marshal_le(m->len, buf, max - nbytes);
+    n = uint16_marshal_le(m->len, buf, max - nbytes);
     if (n < 0) return -1;
     nbytes += n;
     buf += n;
@@ -174,7 +208,7 @@ ssize_t msg_unmarshal(msg_t* m, uint8_t* buf, size_t max) {
     if (m == NULL) return -1;
 
     if (m->data != NULL) {
-        errno = EUCLEAN;
+        errno = EINVAL;
         return -1;
     }
 
@@ -198,8 +232,8 @@ ssize_t msg_unmarshal(msg_t* m, uint8_t* buf, size_t max) {
         return nbytes;
     }
 
-    uint64_t len;
-    n = uint64_unmarshal_le(&len, buf, max-nbytes);
+    uint16_t len;
+    n = uint16_unmarshal_le(&len, buf, max-nbytes);
     if (n < 0) {
         return -1;
     }

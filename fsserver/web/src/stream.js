@@ -38,6 +38,7 @@ function msg_unmarshal(buffer) {
     if (len == 0) return [msg, bytes];
     // TODO: probably don't want to decode here
     msg.data = utf8decoder.decode(buffer.slice(bytes, bytes+len));
+    // msg.data = new Uint8Array(buffer.slice(bytes, bytes+len-1));
     bytes += len
     return [msg, bytes];
 }

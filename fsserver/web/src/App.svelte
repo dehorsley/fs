@@ -1,32 +1,22 @@
 <script>
     import {Stream} from './stream.js'
     import Terminal from './Terminal.svelte';
+    import Xterminal from './Xterminal.svelte';
     import Monitor from './Monitor.svelte';
     import OperatorInput from './OperatorInput.svelte';
     let scrollback = 200;
-    let data = {}
 
-    let loc = window.location, new_uri;
+
+    let loc = window.location, wsbase;
     if (loc.protocol === "https:") {
-        new_uri = "wss:";
+        wsbase = "wss:";
     } else {
-        new_uri = "ws:";
+        wsbase = "ws:";
     }
-    new_uri += "//" + loc.host;
-    new_uri += loc.pathname;
+    wsbase += "//" + loc.host;
+    wsbase += loc.pathname;
 
-    const subaddr = new_uri + "socks";
-
-    const cmdaddr = new_uri + "cmd";
-
-    const max_nodes = 1000;
-    const s = new Stream(subaddr);
-    s.perform_first_sync = true;
-    s.on('data', (d) => {
-        data = JSON.parse(d);
-    });
-    s.on('restart', (data) => {
-    })
+    const cmdaddr = wsbase + "cmd";
 
 </script>
 <style>
@@ -38,8 +28,6 @@
 </style>
 
 <div class="container">
-    <input type=range bind:value={scrollback} min=2 max=100>
-    <Monitor {data} />
-    <Terminal {scrollback} />
+    <Xterminal addr={wsbase + "windows/fs"}/>
     <OperatorInput addr={cmdaddr}/>
 </div>

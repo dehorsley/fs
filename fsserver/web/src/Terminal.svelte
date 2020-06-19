@@ -1,9 +1,10 @@
 <script>
 	import { beforeUpdate, afterUpdate } from 'svelte';
+
     import {Stream} from './stream.js'
 
-    export let scrollback = 1000;
-    export let addr = "socks";
+    export let scrollback = 5000;
+    export let addr = "windows/fs";
     export let perform_first_sync = true;
 
 	let div;

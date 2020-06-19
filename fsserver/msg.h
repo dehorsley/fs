@@ -57,7 +57,7 @@ typedef enum {
 typedef struct {
     msgtype_t type;
     uint64_t seq;
-    uint64_t len;
+    uint16_t len;
     uint8_t *data; 
 } msg_t;
 
@@ -67,7 +67,7 @@ typedef struct {
 // 
 //                                
 //                            _                                  _ 
-//         1        8        |       8           len              |
+//         1        8        |       2           len              |
 //      -------------------- |  ---------------------             |
 //     | type |    seq     | | |    len    |  data ...            |
 //      -------------------- |  ---------------------             |
