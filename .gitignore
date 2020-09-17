@@ -73,3 +73,4 @@ third_party/lib/
 
 .fs_version
 .DS_Store
+fsserver/dump
